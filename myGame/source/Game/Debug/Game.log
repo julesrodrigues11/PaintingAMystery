@@ -1,0 +1,54 @@
+﻿  A subdirectory or file F:\6CCGD001WGameGroupProject\myGame\build\Debug\Content already exists.
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Effects\BasicEffect.cso
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Effects\BasicEffect.fx
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Effects\TextureMapping.fx
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Effects\TextureMapping.cso
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Effects\DiffuseLighting.fx
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Effects\DepthMap.fx
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Effects\DepthMap.cso
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Effects\ShadowMapping.fx
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Effects\ShadowMapping.cso
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Effects\include\Common.fxh
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Models\bench.3ds
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Models\falcon.3ds
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Models\house.3DS
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Models\razor.blend
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Models\deer.3DS
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Models\tree.3DS
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Models\destroyer.3ds
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Models\Sofa.3ds
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Models\Sofa.fbx
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Models\HepBurn_Sofa.3ds
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Models\house2.fbx
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Models\house2.3ds
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Models\DirectionalLightProxy.obj
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Models\DirectionalLightProxy.mtl
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Models\PointLightProxy.obj
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Textures\bench.jpg
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Textures\grass.jpg
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Textures\leather_red_03_coll1_1k.jpg
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Textures\house.bmp
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Textures\PointLightProxy.mtl
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Textures\white.jpg
+  F:\6CCGD001WGameGroupProject\myGame\build\..\content\Fonts\Arial_14_Regular.spritefont
+  32 File(s) copied
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see F:\6CCGD001WGameGroupProject\myGame\build\Debug\Content\Effects\DepthMap.cso
+  ShadowMappingDemo.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(476,7): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(476,29): warning C4309: 'argument': truncation of constant value
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(482,16): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(482,38): warning C4309: 'argument': truncation of constant value
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(487,7): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(487,29): warning C4309: 'argument': truncation of constant value
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(492,16): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(492,38): warning C4309: 'argument': truncation of constant value
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(497,7): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(497,29): warning C4309: 'argument': truncation of constant value
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(502,16): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(502,38): warning C4309: 'argument': truncation of constant value
+  Game.vcxproj -> F:\6CCGD001WGameGroupProject\myGame\build\Debug\Game.exe
+  F:\6CCGD001WGameGroupProject\myGame\build\..\..\external\assimp\bin\assimp_release-dll_win32\assimp.dll
+          1 file(s) copied.

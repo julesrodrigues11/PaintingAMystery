@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>F:\6CCGD001WGameGroupProject\myGame\build\Debug\Game.exe</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles>
+    <ContentFile>
+      <FullPath>F:\6CCGD001WGameGroupProject\myGame\build\Debug\Content\Effects\DepthMap.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>F:\6CCGD001WGameGroupProject\myGame\build\Debug\Content\Effects\DiffuseLighting.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>F:\6CCGD001WGameGroupProject\myGame\build\Debug\Content\Effects\ShadowMapping.cso</FullPath>
+    </ContentFile>
+  </ContentFiles>
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

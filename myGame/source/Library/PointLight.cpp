@@ -1,5 +1,8 @@
 #include "PointLight.h"
 #include "VectorHelper.h"
+#include "Game.h"
+#include "GameTime.h"
+#include "MatrixHelper.h"
 
 namespace Library
 {
@@ -8,7 +11,7 @@ namespace Library
 	const float PointLight::DefaultRadius = 10.0f;
 
 	PointLight::PointLight(Game& game)
-		: Light(game), mPosition(Vector3Helper::Zero), mRadius(DefaultRadius)
+		: Light(game), mPosition(Vector3Helper::Zero), mRadius(DefaultRadius), mDirection(), mUp(), mRight(), mViewMatrix(), mProjectionMatrix()
 	{
 	}
 
@@ -21,9 +24,57 @@ namespace Library
 		return mPosition;
 	}
 
+	const XMFLOAT3& PointLight::Direction() const
+	{
+		return mDirection;
+	}
+
+	const XMFLOAT3& PointLight::Up() const
+	{
+		return mUp;
+	}
+
+	const XMFLOAT3& PointLight::Right() const
+	{
+		return mRight;
+	}
+
 	XMVECTOR PointLight::PositionVector() const
 	{
 		return XMLoadFloat3(&mPosition);
+	}
+
+	XMVECTOR PointLight::DirectionVector() const
+	{
+		return XMLoadFloat3(&mDirection);
+	}
+
+	XMVECTOR PointLight::UpVector() const
+	{
+		return XMLoadFloat3(&mUp);
+	}
+
+	XMVECTOR PointLight::RightVector() const
+	{
+		return XMLoadFloat3(&mRight);
+	}
+
+	XMMATRIX PointLight::ViewMatrix() const
+	{
+		return XMLoadFloat4x4(&mViewMatrix);
+	}
+
+	XMMATRIX PointLight::ProjectionMatrix() const
+	{
+		return XMLoadFloat4x4(&mProjectionMatrix);
+	}
+
+	XMMATRIX PointLight::ViewProjectionMatrix() const
+	{
+		XMMATRIX viewMatrix = XMLoadFloat4x4(&mViewMatrix);
+		XMMATRIX projectionMatrix = XMLoadFloat4x4(&mProjectionMatrix);
+
+		return XMMatrixMultiply(viewMatrix, projectionMatrix);
 	}
 
 	float PointLight::Radius() const
@@ -50,5 +101,47 @@ namespace Library
 	void PointLight::SetRadius(float value)
 	{
 		mRadius = value;
+	}
+
+
+	void PointLight::Update(const GameTime& gameTime)
+	{
+		UpdateViewMatrix();
+	}
+
+	void PointLight::UpdateViewMatrix()
+	{
+		XMVECTOR eyePosition = XMLoadFloat3(&mPosition);
+		XMVECTOR direction = XMLoadFloat3(&mDirection);
+		XMVECTOR upDirection = XMLoadFloat3(&mUp);
+
+		XMMATRIX viewMatrix = XMMatrixLookToRH(eyePosition, direction, upDirection);
+		XMStoreFloat4x4(&mViewMatrix, viewMatrix);
+	}
+
+
+	void PointLight::ApplyRotation(CXMMATRIX transform)
+	{
+		XMVECTOR direction = XMLoadFloat3(&mDirection);
+		XMVECTOR up = XMLoadFloat3(&mUp);
+
+		direction = XMVector3TransformNormal(direction, transform);
+		direction = XMVector3Normalize(direction);
+
+		up = XMVector3TransformNormal(up, transform);
+		up = XMVector3Normalize(up);
+
+		XMVECTOR right = XMVector3Cross(direction, up);
+		up = XMVector3Cross(right, direction);
+
+		XMStoreFloat3(&mDirection, direction);
+		XMStoreFloat3(&mUp, up);
+		XMStoreFloat3(&mRight, right);
+	}
+
+	void PointLight::ApplyRotation(const XMFLOAT4X4& transform)
+	{
+		XMMATRIX transformMatrix = XMLoadFloat4x4(&transform);
+		ApplyRotation(transformMatrix);
 	}
 }

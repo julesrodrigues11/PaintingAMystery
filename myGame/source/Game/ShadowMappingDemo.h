@@ -68,7 +68,7 @@ namespace Rendering
 
 		static const float LightModulationRate;
 		static const float LightMovementRate;
-		static const XMFLOAT2 LightRotationRate;
+		static const float LightRotationRate;
 		static const UINT DepthMapWidth;
 		static const UINT DepthMapHeight;
 		static const RECT DepthMapDestinationRectangle;

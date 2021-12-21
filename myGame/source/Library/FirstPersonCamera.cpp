@@ -4,6 +4,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "VectorHelper.h"
+#include <iostream>
 
 namespace Library
 {
@@ -14,13 +15,13 @@ namespace Library
     const float FirstPersonCamera::DefaultMouseSensitivity = 100.0f;
 
     FirstPersonCamera::FirstPersonCamera(Game& game)
-        : Camera(game), mKeyboard(nullptr), mMouse(nullptr), 
+        : Camera(game), mKeyboard(nullptr), mMouse(nullptr), mPointLight(nullptr), 
           mMouseSensitivity(DefaultMouseSensitivity), mRotationRate(DefaultRotationRate), mMovementRate(DefaultMovementRate)
     {
     }
 
     FirstPersonCamera::FirstPersonCamera(Game& game, float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance)
-        : Camera(game, fieldOfView, aspectRatio, nearPlaneDistance, farPlaneDistance), mKeyboard(nullptr), mMouse(nullptr),
+        : Camera(game, fieldOfView, aspectRatio, nearPlaneDistance, farPlaneDistance), mKeyboard(nullptr), mMouse(nullptr), mPointLight(nullptr),
           mMouseSensitivity(DefaultMouseSensitivity), mRotationRate(DefaultRotationRate), mMovementRate(DefaultMovementRate)
           
     {
@@ -30,6 +31,7 @@ namespace Library
     {
         mKeyboard = nullptr;
         mMouse = nullptr;
+        mPointLight = nullptr;
     }
 
     const Keyboard& FirstPersonCamera::GetKeyboard() const
@@ -72,6 +74,7 @@ namespace Library
     {
         mKeyboard = (Keyboard*)mGame->Services().GetService(Keyboard::TypeIdClass());
         mMouse = (Mouse*)mGame->Services().GetService(Mouse::TypeIdClass());
+       
 
         Camera::Initialize();
     }
@@ -128,8 +131,8 @@ namespace Library
         if ((mMouse != nullptr) && (mMouse->IsButtonHeldDown(MouseButtonsLeft)))
         {
             LPDIMOUSESTATE mouseState = mMouse->CurrentState();			
-            rotationAmount.x = -mouseState->lX * mMouseSensitivity;
-            rotationAmount.y = -mouseState->lY * mMouseSensitivity;
+            rotationAmount.x = -mouseState->lX * 100.0f;
+            rotationAmount.y = -mouseState->lY * 100.0f;
         }
 
 		float elapsedTime = (float)gameTime.ElapsedGameTime();
@@ -140,6 +143,7 @@ namespace Library
         XMMATRIX yawMatrix = XMMatrixRotationY(XMVectorGetX(rotationVector));
 
         ApplyRotation(XMMatrixMultiply(pitchMatrix, yawMatrix));
+        //mPointLight->ApplyRotation(XMMatrixMultiply(pitchMatrix, yawMatrix));
 
         XMVECTOR position = XMLoadFloat3(&mPosition);
 

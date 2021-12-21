@@ -22,6 +22,7 @@
 #include <SpriteFont.h>
 #include <sstream>
 #include <iomanip>
+#include "FirstPersonCamera.h"
 
 namespace Rendering
 {
@@ -29,7 +30,7 @@ namespace Rendering
 
 	const float ShadowMappingDemo::LightModulationRate = UCHAR_MAX;
 	const float ShadowMappingDemo::LightMovementRate = 10.0f;
-	const XMFLOAT2 ShadowMappingDemo::LightRotationRate = XMFLOAT2(XM_2PI, XM_2PI);
+	const float ShadowMappingDemo::LightRotationRate = XMConvertToRadians(1.0f);
 	const UINT ShadowMappingDemo::DepthMapWidth = 1024U;
 	const UINT ShadowMappingDemo::DepthMapHeight = 1024U;
 	const RECT ShadowMappingDemo::DepthMapDestinationRectangle = { 0, 512, 256, 768 };
@@ -140,7 +141,8 @@ namespace Rendering
 
 		mPointLight = new PointLight(*mGame);
 		mPointLight->SetRadius(50.0f);
-		mPointLight->SetPosition(0.0f, 5.0f, 2.0f);
+		mPointLight->SetPosition(mCamera->Position());
+		
 
 		mKeyboard = (Keyboard*)mGame->Services().GetService(Keyboard::TypeIdClass());
 		assert(mKeyboard != nullptr);
@@ -484,32 +486,28 @@ namespace Rendering
                 movementAmount.x = 1.0f;
             }
 
-			if (mKeyboard->IsKeyDown(DIKEYBOARD_Q))
+			if (mKeyboard->IsKeyDown(DIKEYBOARD_W))
             {
                 movementAmount.y = 1.0f;
             }
 
-            if (mKeyboard->IsKeyDown(DIKEYBOARD_E))
+            if (mKeyboard->IsKeyDown(DIKEYBOARD_S))
             {
                 movementAmount.y = -1.0f;
             }
 
-			if (mKeyboard->IsKeyDown(DIKEYBOARD_W))
-            {
-                movementAmount.z = -1.0f;
-            }
-
-            if (mKeyboard->IsKeyDown(DIKEYBOARD_S))
+			if (mKeyboard->IsKeyDown(DIKEYBOARD_Q))
             {
                 movementAmount.z = 1.0f;
             }
+
+            if (mKeyboard->IsKeyDown(DIKEYBOARD_E))
+            {
+                movementAmount.z = -1.0f;
+            }
         }
 
-		XMVECTOR movement = XMLoadFloat3(&movementAmount) * LightMovementRate * elapsedTime;
-		mPointLight->SetPosition(mPointLight->PositionVector() + movement);
-		mProxyModel->SetPosition(mPointLight->Position());
-		mProjector->SetPosition(mPointLight->Position());
-		mRenderableProjectorFrustum->SetPosition(mPointLight->Position());
+		
 
 		// Rotate projector
 		XMFLOAT2 rotationAmount = Vector2Helper::Zero;
@@ -517,39 +515,32 @@ namespace Rendering
 		if ((mMouse != nullptr) && (mMouse->IsButtonHeldDown(MouseButtonsLeft)))
 		{
 			LPDIMOUSESTATE mouseState = mMouse->CurrentState();
-			rotationAmount.x = -mouseState->lX * 0.01f;
-			rotationAmount.y = -mouseState->lY * 0.01f;
+			rotationAmount.x = -mouseState->lX * 100.0f;
+			rotationAmount.y = -mouseState->lY * 100.0f;
 		}
 
-		//float elapsedTime = (float)gameTime.ElapsedGameTime();
+		
 
 
-		if (mKeyboard->IsKeyDown(DIK_LEFTARROW))
-		{
-			rotationAmount.x += LightRotationRate.x * elapsedTime;
-		}
-		if (mKeyboard->IsKeyDown(DIK_RIGHTARROW))
-		{
-			rotationAmount.x -= LightRotationRate.x * elapsedTime;
-		}
-		if (mKeyboard->IsKeyDown(DIK_UPARROW))
-		{
-			rotationAmount.y += LightRotationRate.y * elapsedTime;
-		}
-		if (mKeyboard->IsKeyDown(DIK_DOWNARROW))
-		{
-			rotationAmount.y -= LightRotationRate.y * elapsedTime;
-		}
+		
 
-		XMMATRIX projectorRotationMatrix = XMMatrixIdentity();
+		elapsedTime = (float)gameTime.ElapsedGameTime();
+
+		XMVECTOR rotationVector = XMLoadFloat2(&rotationAmount) * LightRotationRate * elapsedTime;
+		XMVECTOR right = mCamera->RightVector();
+
+		XMMATRIX pitchMatrix = XMMatrixRotationAxis(right, XMVectorGetY(rotationVector));
+		XMMATRIX yawMatrix = XMMatrixRotationY(XMVectorGetX(rotationVector));
+
+		/*XMMATRIX projectorRotationMatrix = XMMatrixIdentity();
 		if (rotationAmount.x != 0)
 		{
-			projectorRotationMatrix = XMMatrixRotationY(rotationAmount.x);
+			projectorRotationMatrix = XMMatrixRotationY(rotationAmount.x * LightRotationRate * elapsedTime);
 		}
 
 		if (rotationAmount.y != 0)
 		{
-			XMMATRIX projectorRotationAxisMatrix = XMMatrixRotationAxis(mProjector->RightVector(), rotationAmount.y);
+			XMMATRIX projectorRotationAxisMatrix = XMMatrixRotationAxis(mProjector->RightVector(), rotationAmount.y * LightRotationRate * elapsedTime);
 			projectorRotationMatrix *= projectorRotationAxisMatrix;
 		}
 
@@ -557,30 +548,35 @@ namespace Rendering
 		{
 			mProjector->ApplyRotation(projectorRotationMatrix);
 			mRenderableProjectorFrustum->ApplyRotation(projectorRotationMatrix);
-		}
-
-		XMVECTOR rotationVector = XMLoadFloat2(&rotationAmount) * XMConvertToRadians(1.0f) * elapsedTime;
-		XMVECTOR right = mProjector->RightVector();
-
-		XMMATRIX pitchMatrix = XMMatrixRotationAxis(mProjector->RightVector(), XMVectorGetY(rotationVector));
-		XMMATRIX yawMatrix = XMMatrixRotationY(XMVectorGetX(rotationVector));
+		}*/
 
 		mProjector->ApplyRotation(XMMatrixMultiply(pitchMatrix, yawMatrix));
+		mRenderableProjectorFrustum->ApplyRotation(XMMatrixMultiply(pitchMatrix, yawMatrix));
 
-		XMVECTOR position = XMLoadFloat3(&mPointLight->Position());
+		XMVECTOR position = XMLoadFloat3(&mProjector->Position());
 
-		XMVECTOR upDown = mProjector->UpVector() * XMVectorGetZ(movement);
+		XMVECTOR movement = XMLoadFloat3(&movementAmount) * LightMovementRate * elapsedTime;
+		
+
+		XMVECTOR upDown = mCamera->UpVector() * XMVectorGetZ(movement);
 		position += upDown;
 
 
 
-		XMVECTOR strafe = mProjector->RightVector() * XMVectorGetX(movement);
+		XMVECTOR strafe = mCamera->RightVector() * XMVectorGetX(movement);
 		position += strafe;
 
-		XMVECTOR forward = mProjector->DirectionVector() * XMVectorGetY(movement);
+		XMVECTOR forward = mCamera->DirectionVector() * XMVectorGetY(movement);
 		position += forward;
 
+		mPointLight->SetPosition(mCamera->Position());
+		mProxyModel->SetPosition(mPointLight->Position());
+		mProjector->SetPosition(mPointLight->Position());
+		mRenderableProjectorFrustum->SetPosition(mPointLight->Position());
+		//mPointLight->SetPosition(mProjector->Position());
+
 		XMStoreFloat3(&mPointLight->Position(), position);
+
 	}
 
 	void ShadowMappingDemo::InitializeProjectedTextureScalingMatrix()

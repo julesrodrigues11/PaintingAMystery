@@ -1,11 +1,14 @@
 #pragma once
 
 #include "Camera.h"
+#include "PointLight.h"
+
 
 namespace Library
 {
     class Keyboard;
     class Mouse;
+    class PointLight;
 
     class FirstPersonCamera : public Camera
     {
@@ -41,6 +44,8 @@ namespace Library
 
 		Keyboard* mKeyboard;
         Mouse* mMouse;
+
+        PointLight* mPointLight;
 
     private:
         FirstPersonCamera(const FirstPersonCamera& rhs);

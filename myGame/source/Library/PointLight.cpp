@@ -8,10 +8,16 @@ namespace Library
 {
 	RTTI_DEFINITIONS(PointLight)
 
+	const float PointLight::DefaultFieldOfView = XM_PIDIV4;
+	const float PointLight::DefaultAspectRatio = 4.0f / 3.0f;
+	const float PointLight::DefaultNearPlaneDistance = .5f;
+	const float PointLight::DefaultFarPlaneDistance = 100.0f;
+
 	const float PointLight::DefaultRadius = 10.0f;
 
 	PointLight::PointLight(Game& game)
-		: Light(game), mPosition(Vector3Helper::Zero), mRadius(DefaultRadius), mDirection(), mUp(), mRight(), mViewMatrix(), mProjectionMatrix()
+		: Light(game), mPosition(Vector3Helper::Zero), mFieldOfView(DefaultFieldOfView), mAspectRatio(DefaultAspectRatio), mNearPlaneDistance(DefaultNearPlaneDistance), mFarPlaneDistance(DefaultFarPlaneDistance),
+		mRadius(DefaultRadius), mDirection(), mUp(), mRight(), mViewMatrix(), mProjectionMatrix()
 	{
 	}
 
@@ -118,6 +124,13 @@ namespace Library
 		XMMATRIX viewMatrix = XMMatrixLookToRH(eyePosition, direction, upDirection);
 		XMStoreFloat4x4(&mViewMatrix, viewMatrix);
 	}
+
+	void PointLight::UpdateProjectionMatrix()
+	{
+		XMMATRIX projectionMatrix = XMMatrixPerspectiveFovRH(mFieldOfView, mAspectRatio, mNearPlaneDistance, mFarPlaneDistance);
+		XMStoreFloat4x4(&mProjectionMatrix, projectionMatrix);
+	}
+
 
 
 	void PointLight::ApplyRotation(CXMMATRIX transform)

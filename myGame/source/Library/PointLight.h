@@ -29,7 +29,10 @@ namespace Library
 		XMMATRIX ProjectionMatrix() const;
 		XMMATRIX ViewProjectionMatrix() const;
 
-		
+		float AspectRatio() const;
+		float FieldOfView() const;
+		float NearPlaneDistance() const;
+		float FarPlaneDistance() const;
 
 		virtual void SetPosition(FLOAT x, FLOAT y, FLOAT z);
         virtual void SetPosition(FXMVECTOR position);
@@ -37,12 +40,23 @@ namespace Library
 		virtual void SetRadius(float value);
 		virtual void Update(const GameTime& gameTime) override;
 		virtual void UpdateViewMatrix();
+		virtual void UpdateProjectionMatrix();
 		virtual void ApplyRotation(CXMMATRIX transform);
 		virtual void ApplyRotation(const XMFLOAT4X4& transform);
+
+		static const float DefaultFieldOfView;
+		static const float DefaultAspectRatio;
+		static const float DefaultNearPlaneDistance;
+		static const float DefaultFarPlaneDistance;
 
 		static const float DefaultRadius;
 
 	protected:
+		float mFieldOfView;
+		float mAspectRatio;
+		float mNearPlaneDistance;
+		float mFarPlaneDistance;
+
 		XMFLOAT3 mPosition;
 		XMFLOAT3 mDirection;
 		XMFLOAT3 mUp;

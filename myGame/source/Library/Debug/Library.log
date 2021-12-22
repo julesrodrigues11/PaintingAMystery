@@ -1,5 +1,10 @@
 ﻿  FirstPersonCamera.cpp
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  PointLight.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  SpotLight.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Generating Code...
   Library.vcxproj -> F:\6CCGD001WGameGroupProject\myGame\build\Debug\Libraryd.lib
   A subdirectory or file F:\6CCGD001WGameGroupProject\myGame\build\..\lib\ already exists.
           1 file(s) copied.

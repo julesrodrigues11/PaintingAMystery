@@ -40,7 +40,7 @@ namespace Rendering
 		: DrawableGameComponent(game, camera), mCheckerboardTexture(nullptr),
 		  mPlanePositionVertexBuffer(nullptr), mPlanePositionUVNormalVertexBuffer(nullptr), mPlaneIndexBuffer(nullptr), mPlaneVertexCount(0),
 		  mKeyboard(nullptr), mMouse(nullptr), mAmbientColor(1.0f, 1.0f, 1.0, 0.0f), mPointLight(nullptr), 
-		  mSpecularColor(1.0f, 1.0f, 1.0f, 1.0f), mSpecularPower(25.0f), mPlaneWorldMatrix(MatrixHelper::Identity), mProxyModel(nullptr),
+		  mSpecularColor(1.0f, 1.0f, 1.0f, 0.0f), mSpecularPower(255.0f), mPlaneWorldMatrix(MatrixHelper::Identity), mProxyModel(nullptr),
 		  mProjector(nullptr), mProjectorFrustum(XMMatrixIdentity()), mRenderableProjectorFrustum(nullptr),
 		  mShadowMappingEffect(nullptr), mShadowMappingMaterial(nullptr),
 		  mProjectedTextureScalingMatrix(MatrixHelper::Zero), mRenderStateHelper(game),
@@ -166,7 +166,7 @@ namespace Rendering
 		InitializeProjectedTextureScalingMatrix();
 
 		// Vertex and index buffers for a second model to render
-		std::unique_ptr<Model> model(new Model(*mGame, "content\\Models\\house.3ds", true));
+		std::unique_ptr<Model> model(new Model(*mGame, "content\\Models\\HepBurn_Sofa.3ds", true));
 
 		Mesh* mesh = model->Meshes().at(0);
 		mDepthMapMaterial->CreateVertexBuffer(mGame->Direct3DDevice(), *mesh, &mModelPositionVertexBuffer);
@@ -550,10 +550,12 @@ namespace Rendering
 			mRenderableProjectorFrustum->ApplyRotation(projectorRotationMatrix);
 		}*/
 
+		mPointLight->ApplyRotation(XMMatrixMultiply(pitchMatrix, yawMatrix));
 		mProjector->ApplyRotation(XMMatrixMultiply(pitchMatrix, yawMatrix));
+		mProxyModel->ApplyRotation(XMMatrixMultiply(pitchMatrix, yawMatrix));
 		mRenderableProjectorFrustum->ApplyRotation(XMMatrixMultiply(pitchMatrix, yawMatrix));
 
-		XMVECTOR position = XMLoadFloat3(&mProjector->Position());
+		XMVECTOR position = XMLoadFloat3(&mPointLight->Position());
 
 		XMVECTOR movement = XMLoadFloat3(&movementAmount) * LightMovementRate * elapsedTime;
 		

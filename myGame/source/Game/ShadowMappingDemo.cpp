@@ -121,7 +121,7 @@ namespace Rendering
 
 
 		
-		std::wstring textureName = L"content\\Textures\\house.bmp";
+		std::wstring textureName = L"content\\Textures\\texture_environment_gpdx2.png";
 		HRESULT hr = DirectX::CreateWICTextureFromFile(mGame->Direct3DDevice(), mGame->Direct3DDeviceContext(), textureName.c_str(), nullptr, &mCheckerboardTexture);
 		if (FAILED(hr))
 		{
@@ -166,7 +166,7 @@ namespace Rendering
 		InitializeProjectedTextureScalingMatrix();
 
 		// Vertex and index buffers for a second model to render
-		std::unique_ptr<Model> model(new Model(*mGame, "content\\Models\\HepBurn_Sofa.3ds", true));
+		std::unique_ptr<Model> model(new Model(*mGame, "content\\Models\\environment.fbx", true));
 
 		Mesh* mesh = model->Meshes().at(0);
 		mDepthMapMaterial->CreateVertexBuffer(mGame->Direct3DDevice(), *mesh, &mModelPositionVertexBuffer);
@@ -174,7 +174,7 @@ namespace Rendering
 		mesh->CreateIndexBuffer(&mModelIndexBuffer);
 		mModelIndexCount = mesh->Indices().size();
 		
-		XMStoreFloat4x4(&mModelWorldMatrix, XMMatrixRotationX(-1.57f)* XMMatrixScaling(0.025f, 0.025f, 0.025f) * XMMatrixTranslation(0.0f, 4.25f, -4.5f));		
+		XMStoreFloat4x4(&mModelWorldMatrix, XMMatrixRotationX(0.0f)* XMMatrixScaling(1.0f, 1.0f, 1.0f) * XMMatrixTranslation(0.0f, 4.25f, -4.5f));		
 
 		mDepthMap = new DepthMap(*mGame, DepthMapWidth, DepthMapHeight);
 		mSpriteBatch = new SpriteBatch(mGame->Direct3DDeviceContext());

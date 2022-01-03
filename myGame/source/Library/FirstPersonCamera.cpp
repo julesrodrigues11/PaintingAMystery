@@ -81,21 +81,19 @@ namespace Library
 
     void FirstPersonCamera::Update(const GameTime& gameTime)
     {
-		//XMFLOAT2 movementAmount = Vector2Helper::Zero;
-
-		XMFLOAT3 movementAmount = Vector3Helper::Zero;
-
+        XMFLOAT3 movementAmount = Vector3Helper::Zero;
+        //XMFLOAT3 movementAmount = Vector3Helper::Zero;
 
         if (mKeyboard != nullptr)
         {
             if (mKeyboard->IsKeyDown(DIK_W))
             {
-                movementAmount.y = 1.0f;
+                movementAmount.z = 1.0f;
             }
 
             if (mKeyboard->IsKeyDown(DIK_S))
             {
-                movementAmount.y = -1.0f;
+                movementAmount.z = -1.0f;
             }
 
             if (mKeyboard->IsKeyDown(DIK_A))
@@ -108,21 +106,16 @@ namespace Library
                 movementAmount.x = 1.0f;
             }
 
-			//Q and E
-			if (mKeyboard->IsKeyDown(DIK_Q))
-			{
-				movementAmount.z = 1.0f;
-			}
+            //Q and E
+    /*		if (mKeyboard->IsKeyDown(DIK_Q))
+            {
+                movementAmount.z = 1.0f;
+            }
 
-			if (mKeyboard->IsKeyDown(DIK_E))
-			{
-				movementAmount.z = -1.0f;
-			}
-
-
-
-
-
+            if (mKeyboard->IsKeyDown(DIK_E))
+            {
+                movementAmount.z = -1.0f;
+            }*/
         }
 
         XMFLOAT2 rotationAmount = Vector2Helper::Zero;
@@ -130,12 +123,12 @@ namespace Library
 
         if ((mMouse != nullptr) && (mMouse->IsButtonHeldDown(MouseButtonsLeft)))
         {
-            LPDIMOUSESTATE mouseState = mMouse->CurrentState();			
+            LPDIMOUSESTATE mouseState = mMouse->CurrentState();
             rotationAmount.x = -mouseState->lX * 100.0f;
             rotationAmount.y = -mouseState->lY * 100.0f;
         }
 
-		float elapsedTime = (float)gameTime.ElapsedGameTime();
+        float elapsedTime = (float)gameTime.ElapsedGameTime();
         XMVECTOR rotationVector = XMLoadFloat2(&rotationAmount) * mRotationRate * elapsedTime;
         XMVECTOR right = XMLoadFloat3(&mRight);
 
@@ -143,26 +136,52 @@ namespace Library
         XMMATRIX yawMatrix = XMMatrixRotationY(XMVectorGetX(rotationVector));
 
         ApplyRotation(XMMatrixMultiply(pitchMatrix, yawMatrix));
+        XMVECTOR position = XMLoadFloat3(&mPosition);
+        XMVECTOR movement = XMLoadFloat3(&movementAmount) * mMovementRate * elapsedTime;
+
+        auto mStraightDirection = mDirection;
+        mStraightDirection.y = 0;
+
+        XMStoreFloat3(&mStraightDirection, XMVector3Normalize(XMLoadFloat3(&mStraightDirection)));
+        XMVECTOR fixedRight;
+
+        fixedRight = XMVector3Normalize(XMVector3Cross(XMLoadFloat3(&mStraightDirection), XMLoadFloat3(&Vector3Helper::Up)));
+
+
+        XMVECTOR strafe = fixedRight * XMVectorGetX(movement);
+        position += strafe;
+
+        XMVECTOR forward = XMLoadFloat3(&mStraightDirection) * XMVectorGetZ(movement);
+        position += forward;
+
+        XMStoreFloat3(&mPosition, position);
+        /*
         //mPointLight->ApplyRotation(XMMatrixMultiply(pitchMatrix, yawMatrix));
 
         XMVECTOR position = XMLoadFloat3(&mPosition);
 
-		//XMVECTOR movement = XMLoadFloat2(&movementAmount) * mMovementRate * elapsedTime;
+        //XMVECTOR movement = XMLoadFloat2(&movementAmount) * mMovementRate * elapsedTime;
 
-		// Q and E
-		XMVECTOR movement = XMLoadFloat3(&movementAmount) * mMovementRate * elapsedTime;
-		XMVECTOR upDown = XMLoadFloat3(&mUp) * XMVectorGetZ(movement);
-		position += upDown;
+        // Q and E
+        XMVECTOR movement = XMLoadFloat2(&movementAmount) * mMovementRate * elapsedTime;
+        //XMVECTOR upDown = XMLoadFloat3(&Vector3Helper::Up) * XMVectorGetZ(movement);
+        //position += upDown;
 
+        mStraightDirection = mDirection;
+        mStraightDirection.z = 0;
 
+        XMStoreFloat3(&mStraightDirection, XMVector3Normalize(XMLoadFloat3(&mStraightDirection)));
+        XMVECTOR fixedRight;
 
-		XMVECTOR strafe = right * XMVectorGetX(movement);
+        fixedRight = XMVector3Normalize(XMVector3Cross(XMLoadFloat3(&mStraightDirection), XMLoadFloat3(&Vector3Helper::Up)));
+        XMVECTOR strafe = fixedRight * XMVectorGetX(movement);// *DirectX::CXMVECTOR(1, 1, 0);
         position += strafe;
 
-        XMVECTOR forward = XMLoadFloat3(&mDirection) * XMVectorGetY(movement);
+        XMVECTOR forward = XMLoadFloat3(&mDirection) *  XMVectorGetY(movement);// XMLoadFloat3(&mDirection) * XMVectorGetY(movement);
         position += forward;
-        
+
         XMStoreFloat3(&mPosition, position);
+        */
 
         Camera::Update(gameTime);
     }

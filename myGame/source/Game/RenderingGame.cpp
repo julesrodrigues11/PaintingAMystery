@@ -95,7 +95,7 @@ namespace Rendering
 
 		Game::Initialize();
 
-        mCamera->SetPosition(0.0f, 0.0f, 0.0f);
+        mCamera->SetPosition(0.0f, 13.0f, 0.0f);
 
 		
 

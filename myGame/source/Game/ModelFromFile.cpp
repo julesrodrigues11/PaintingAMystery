@@ -24,13 +24,7 @@ namespace Rendering
 		mModelValue = 0;
     }
 
-	ModelFromFile::ModelFromFile(Game& game, Camera& camera, const std::string modelFilename, const std::wstring ModelDes, int ModelValue)
-		: DrawableGameComponent(game, camera),
-		mEffect(nullptr), mTechnique(nullptr), mPass(nullptr), mWvpVariable(nullptr), mTextureShaderResourceView(nullptr), mColorTextureVariable(nullptr),
-		mInputLayout(nullptr), mWorldMatrix(MatrixHelper::Identity), mVertexBuffer(nullptr), mIndexBuffer(nullptr), mIndexCount(0), modelFile(modelFilename), modelDes(ModelDes), mModelValue(ModelValue) 
-	{
-
-	}
+	
 
     ModelFromFile::~ModelFromFile()
     {

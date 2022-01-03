@@ -5,7 +5,7 @@
 
 #include "Keyboard.h"
 #include "Mouse.h"
-//#include "ModelFromFile.h"
+#include "ModelFromFile.h"
 #include "FpsComponent.h"
 #include "RenderStateHelper.h"
 //#include "ObjectDiffuseLight.h"
@@ -38,8 +38,7 @@ namespace Rendering
     }
 
     void RenderingGame::Initialize()
-    {
-		
+    {	
         mCamera = new FirstPersonCamera(*this);
         mComponents.push_back(mCamera);
         mServices.AddService(Camera::TypeIdClass(), mCamera);
@@ -63,11 +62,11 @@ namespace Rendering
 		mComponents.push_back(mMouse);
 		mServices.AddService(Mouse::TypeIdClass(), mMouse);
 
-     
 		
-		//mModel1 = new ModelFromFile(*this, *mCamera, "Content\\Models\\bench.3ds", L"A Bench",20);
-		//mModel1->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 0.0f, 0.4f, 0.0f);
-		//mComponents.push_back(mModel1);
+		
+		mModel1 = new ModelFromFile(*this, *mCamera, "Content\\Models\\bench.3ds", L"A Bench",20);
+		mModel1->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 0.0f, 12.0f, 0.0f);
+		mComponents.push_back(mModel1);
 
 		//mModel2 = new ModelFromFile(*this, *mCamera, "Content\\Models\\bench.3ds", L"A tree", 10);
 		//mModel2->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 5.0f, 0.4f, 0.0f);
@@ -96,11 +95,6 @@ namespace Rendering
 		Game::Initialize();
 
         mCamera->SetPosition(0.0f, 13.0f, 0.0f);
-
-		
-
-
-
     }
 
     void RenderingGame::Shutdown()
@@ -116,7 +110,7 @@ namespace Rendering
 		DeleteObject(mMouse);
 		ReleaseObject(mDirectInput);
 		
-		//DeleteObject(mModel1);
+		DeleteObject(mModel1);
 		//DeleteObject(mModel2);
 	
 

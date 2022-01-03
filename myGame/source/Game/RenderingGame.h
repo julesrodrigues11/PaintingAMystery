@@ -29,6 +29,7 @@ namespace Rendering
 	//class ModelFromFile;
 	//class ObjectDiffuseLight;
 	class ShadowMappingDemo;
+	class ModelFromFile;
 
     class RenderingGame : public Game
     {
@@ -54,7 +55,7 @@ namespace Rendering
 
 		Keyboard* mKeyboard;
 		Mouse*    mMouse;
-		//ModelFromFile* mModel1;
+		ModelFromFile* mModel1;
 		//ModelFromFile* mModel2;
 	
 		int mScore;

@@ -27,7 +27,7 @@ namespace Rendering
 {
     //class TriangleDemo;
 	//class ModelFromFile;
-	//class ObjectDiffuseLight;
+	class ObjectDiffuseLight;
 	class ShadowMappingDemo;
 	class ModelFromFile;
 
@@ -67,9 +67,9 @@ namespace Rendering
 		ShadowMappingDemo* mShadowMappingDemo;
 
 
-		//ObjectDiffuseLight* mObjectDiffuseLight;
+		ObjectDiffuseLight* mObjectDiffuseLight;
 
-		//void Pick(int sx, int sy, ModelFromFile*);
+		void Pick(int sx, int sy, ModelFromFile*);
 
 	
 

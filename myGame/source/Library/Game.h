@@ -50,6 +50,10 @@ namespace Library
 		virtual void ResetRenderTargets();
 		virtual void UnbindPixelShaderResources(UINT startSlot, UINT count);
 
+        static bool toPick;
+		static int screenX;
+		static int screenY;
+
     protected:
 		virtual void Begin() override;
 		virtual void End() override;

@@ -4,6 +4,7 @@
 #include "GameClock.h"
 #include "GameTime.h"
 #include "GameComponent.h"
+#include "DrawableGameComponent.h"
 #include "ServiceContainer.h"
 #include "RenderTarget.h"
 

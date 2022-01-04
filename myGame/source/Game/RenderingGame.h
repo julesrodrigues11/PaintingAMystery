@@ -55,8 +55,8 @@ namespace Rendering
 
 		Keyboard* mKeyboard;
 		Mouse*    mMouse;
-		ModelFromFile* mModel1;
-		//ModelFromFile* mModel2;
+		ModelFromFile* mTakenObject;
+		std::vector<ModelFromFile*> mDrawableComponents;
 	
 		int mScore;
 		SpriteBatch* mSpriteBatch;
@@ -70,8 +70,5 @@ namespace Rendering
 		ObjectDiffuseLight* mObjectDiffuseLight;
 
 		void Pick(int sx, int sy, ModelFromFile*);
-
-	
-
     };
 }

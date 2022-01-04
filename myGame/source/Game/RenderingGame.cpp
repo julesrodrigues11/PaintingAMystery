@@ -17,6 +17,8 @@
 #include <SpriteFont.h>
 #include <sstream>
 
+# define M_PI           3.14159265358979323846  /* pi */
+
 namespace Rendering
 {;
 
@@ -64,9 +66,10 @@ namespace Rendering
 
 		
 		
-		mModel1 = new ModelFromFile(*this, *mCamera, "Content\\Models\\bench.3ds", L"A Bench",20);
+		auto mModel1 = new ModelFromFile(*this, *mCamera, "Content\\Models\\bench.3ds", L"A Bench",20);
 		mModel1->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 0.0f, 12.0f, 0.0f);
 		mComponents.push_back(mModel1);
+		mDrawableComponents.push_back(mModel1);
 
 		//mModel2 = new ModelFromFile(*this, *mCamera, "Content\\Models\\bench.3ds", L"A tree", 10);
 		//mModel2->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 5.0f, 0.4f, 0.0f);
@@ -110,7 +113,10 @@ namespace Rendering
 		DeleteObject(mMouse);
 		ReleaseObject(mDirectInput);
 		
-		DeleteObject(mModel1);
+		for (auto comp : mDrawableComponents) 
+		{
+			DeleteObject(comp);
+		}
 		//DeleteObject(mModel2);
 	
 
@@ -132,6 +138,8 @@ namespace Rendering
     {
 
 		mFpsComponent->Update(gameTime);
+
+		
 		Game::Update(gameTime);
 		
 
@@ -143,19 +151,38 @@ namespace Rendering
 
 
 		//bounding box , we need to see if we need to do the picking test
-		/*if (Game::toPick)
-		{
-			
-			if (mModel1->Visible())
-				Pick(Game::screenX, Game::screenY, mModel1);
+		for (auto& component : mDrawableComponents) {
+			if (component->Taken()) {
+				mTakenObject = component;
+				component->Release();
+			}
+		}
 
-			if (mModel2->Visible())
-				Pick(Game::screenX, Game::screenY, mModel2);
-	
-			
-			
+		if (mTakenObject != nullptr) {
+			const auto& position = mCamera->Position();
+			const auto& direction = mCamera->Direction();
+			if (direction.x == 0 && direction.z == 0) {
+				mTakenObject->SetPosition(0.0f, -direction.y, 0.0f, 0.001f, position.x + direction.x, position.y + direction.y, position.z + direction.z);
+			}
+			else {
+				auto angle = atan2(direction.x, direction.z);
+				auto hype = sqrt(direction.x * direction.x + direction.z * direction.z);
+				auto angle2 = atan(direction.y / hype);
+				mTakenObject->SetPosition(-M_PI/2.0 + angle2, M_PI+angle, 0.0f, 0.001f, position.x + direction.x, position.y + direction.y, position.z + direction.z);
+
+
+			}
+		}
+		
+
+		if (Game::toPick)
+		{
+			for (auto& component : mDrawableComponents) {
+				if (component->Visible())
+					Pick(Game::screenX, Game::screenY, component);
+			}
 			Game::toPick = false;
-		}*/
+		}
 
 	}
 
@@ -184,7 +211,7 @@ namespace Rendering
 
 		
 		XMMATRIX W = XMLoadFloat4x4(model->WorldMatrix());
-			XMMATRIX invWorld = XMMatrixInverse(&XMMatrixDeterminant(W), W);
+		XMMATRIX invWorld = XMMatrixInverse(&XMMatrixDeterminant(W), W);
 
 		XMMATRIX toLocal = XMMatrixMultiply(invView, invWorld);
 
@@ -206,8 +233,7 @@ namespace Rendering
 
 			if (result == IDYES)
 			{ 
-		
-
+				model->Take();
 			}
 		
 		}

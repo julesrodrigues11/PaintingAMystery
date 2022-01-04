@@ -17,8 +17,8 @@ namespace Library
         virtual ~DrawableGameComponent();
 
         bool Visible() const;
+       
         void SetVisible(bool visible);
-
         Camera* GetCamera();
         void SetCamera(Camera* camera);
 

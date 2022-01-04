@@ -28,7 +28,9 @@ namespace Rendering
 		//add to support multiple model in the scene, remove this function
 
 		void SetPosition(const float rotateX, const float rotateY, const float rotateZ, const float scaleFactor, const float translateX, const float translateY, const float translateZ);
+		void SetPosition(const float translateX, const float translateY, const float translateZ);
 
+		
 		//bounding box require to access the world matrix
 
 		XMFLOAT4X4* WorldMatrix() { return &mWorldMatrix; }
@@ -42,12 +44,19 @@ namespace Rendering
 		virtual void Initialize() override;
 		virtual void Draw(const GameTime& gameTime) override;
 
-
-
-
-
+		bool Taken();
+		void Take();
+		void Release();
 
 	private:
+		float rotateX = 0.0f;
+		float rotateY = 0.0f;
+		float rotateZ = 0.0f;
+		float scaleFactor = 0.0f;
+		float translateX = 0.0f;
+		float translateY = 0.0f;
+		float translateZ = 0.0f;
+		bool taken;
 		typedef struct _TextureMappingVertex
 		{
 			XMFLOAT4 Position;
@@ -85,8 +94,6 @@ namespace Rendering
 
 		std::wstring modelDes;
 		int mModelValue;
-
-
 
 	};
 }

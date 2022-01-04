@@ -18,14 +18,15 @@ namespace Rendering
         ModelFromFile::ModelFromFile(Game& game, Camera& camera, const std::string modelFilename)
         : DrawableGameComponent(game, camera),
         mEffect(nullptr), mTechnique(nullptr), mPass(nullptr), mWvpVariable(nullptr), mTextureShaderResourceView(nullptr), mColorTextureVariable(nullptr),
-        mInputLayout(nullptr), mWorldMatrix(MatrixHelper::Identity), mVertexBuffer(nullptr), mIndexBuffer(nullptr), mIndexCount(0), modelFile(modelFilename)
+        mInputLayout(nullptr), mWorldMatrix(MatrixHelper::Identity), mVertexBuffer(nullptr), mIndexBuffer(nullptr), mIndexCount(0), modelFile(modelFilename), taken(false)
     {
         //we don't use the model description and model value for this constructor
         mModelValue = 0;
+        
     }
 
     ModelFromFile::ModelFromFile(Game& game, Camera& camera, const std::string modelFilename, const std::wstring ModelDes, int ModelValue)
-        : DrawableGameComponent(game, camera),
+        : DrawableGameComponent(game, camera), taken(false),
         mEffect(nullptr), mTechnique(nullptr), mPass(nullptr), mWvpVariable(nullptr), mTextureShaderResourceView(nullptr), mColorTextureVariable(nullptr),
         mInputLayout(nullptr), mWorldMatrix(MatrixHelper::Identity), mVertexBuffer(nullptr), mIndexBuffer(nullptr), mIndexCount(0), modelFile(modelFilename), modelDes(ModelDes), mModelValue(ModelValue)
     {
@@ -176,6 +177,30 @@ namespace Rendering
 
     void ModelFromFile::SetPosition(const float rotateX, const float rotateY, const float rotateZ, const float scaleFactor, const float translateX, const float translateY, const float translateZ)
     {
+        this->rotateX = rotateX;
+        this->rotateY = rotateY;
+        this->rotateZ = rotateZ;
+        this->scaleFactor = scaleFactor;
+        this->translateX = translateX;
+        this->translateY = translateY;
+        this->translateZ = translateZ;
+        XMMATRIX worldMatrix = XMLoadFloat4x4(&mWorldMatrix);
+        XMMATRIX RotationZ = XMMatrixRotationZ(rotateZ);
+        XMMATRIX RotationX = XMMatrixRotationX(rotateX);
+        XMMATRIX RotationY = XMMatrixRotationY(rotateY);
+        XMMATRIX Scale = XMMatrixScaling(scaleFactor, scaleFactor, scaleFactor);
+        XMMATRIX Translation = XMMatrixTranslation(translateX, translateY, translateZ);
+        worldMatrix = RotationZ * RotationX * RotationY * Scale * Translation;
+
+        XMStoreFloat4x4(&mWorldMatrix, worldMatrix);
+    }
+
+
+    void ModelFromFile::SetPosition(const float translateX, const float translateY, const float translateZ)
+    {
+        this->translateX = translateX;
+        this->translateY = translateY;
+        this->translateZ = translateZ;
         XMMATRIX worldMatrix = XMLoadFloat4x4(&mWorldMatrix);
         XMMATRIX RotationZ = XMMatrixRotationZ(rotateZ);
         XMMATRIX RotationX = XMMatrixRotationX(rotateX);
@@ -202,8 +227,6 @@ namespace Rendering
         //	XMStoreFloat4x4(&mWorldMatrix, worldMatrix);
 
 
-
-
     }
 
 
@@ -228,6 +251,21 @@ namespace Rendering
         mPass->Apply(0, direct3DDeviceContext);
 
         direct3DDeviceContext->DrawIndexed(mIndexCount, 0, 0);
+    }
+
+    bool ModelFromFile::Taken()
+    {
+        return taken;
+    }
+
+    void ModelFromFile::Take()
+    {
+        taken = true;
+    }
+
+    void ModelFromFile::Release()
+    {
+        taken = false;
     }
 
     void ModelFromFile::CreateVertexBuffer(ID3D11Device* device, const Mesh& mesh, ID3D11Buffer** vertexBuffer) const

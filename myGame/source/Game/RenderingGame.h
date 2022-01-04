@@ -27,8 +27,9 @@ namespace Rendering
 {
     //class TriangleDemo;
 	//class ModelFromFile;
-	//class ObjectDiffuseLight;
+	class ObjectDiffuseLight;
 	class ShadowMappingDemo;
+	class ModelFromFile;
 
     class RenderingGame : public Game
     {
@@ -54,8 +55,8 @@ namespace Rendering
 
 		Keyboard* mKeyboard;
 		Mouse*    mMouse;
-		//ModelFromFile* mModel1;
-		//ModelFromFile* mModel2;
+		ModelFromFile* mTakenObject;
+		std::vector<ModelFromFile*> mDrawableComponents;
 	
 		int mScore;
 		SpriteBatch* mSpriteBatch;
@@ -66,11 +67,8 @@ namespace Rendering
 		ShadowMappingDemo* mShadowMappingDemo;
 
 
-		//ObjectDiffuseLight* mObjectDiffuseLight;
+		ObjectDiffuseLight* mObjectDiffuseLight;
 
-		//void Pick(int sx, int sy, ModelFromFile*);
-
-	
-
+		void Pick(int sx, int sy, ModelFromFile*);
     };
 }

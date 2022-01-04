@@ -4,6 +4,7 @@
 #include "GameClock.h"
 #include "GameTime.h"
 #include "GameComponent.h"
+#include "DrawableGameComponent.h"
 #include "ServiceContainer.h"
 #include "RenderTarget.h"
 
@@ -49,6 +50,10 @@ namespace Library
 
 		virtual void ResetRenderTargets();
 		virtual void UnbindPixelShaderResources(UINT startSlot, UINT count);
+
+        static bool toPick;
+		static int screenX;
+		static int screenY;
 
     protected:
 		virtual void Begin() override;

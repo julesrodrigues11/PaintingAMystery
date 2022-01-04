@@ -5,7 +5,7 @@
 
 #include "Keyboard.h"
 #include "Mouse.h"
-//#include "ModelFromFile.h"
+#include "ModelFromFile.h"
 #include "FpsComponent.h"
 #include "RenderStateHelper.h"
 //#include "ObjectDiffuseLight.h"
@@ -16,6 +16,8 @@
 //display score
 #include <SpriteFont.h>
 #include <sstream>
+
+# define M_PI           3.14159265358979323846  /* pi */
 
 namespace Rendering
 {;
@@ -38,8 +40,7 @@ namespace Rendering
     }
 
     void RenderingGame::Initialize()
-    {
-		
+    {	
         mCamera = new FirstPersonCamera(*this);
         mComponents.push_back(mCamera);
         mServices.AddService(Camera::TypeIdClass(), mCamera);
@@ -63,11 +64,12 @@ namespace Rendering
 		mComponents.push_back(mMouse);
 		mServices.AddService(Mouse::TypeIdClass(), mMouse);
 
-     
 		
-		//mModel1 = new ModelFromFile(*this, *mCamera, "Content\\Models\\bench.3ds", L"A Bench",20);
-		//mModel1->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 0.0f, 0.4f, 0.0f);
-		//mComponents.push_back(mModel1);
+		
+		auto mModel1 = new ModelFromFile(*this, *mCamera, "Content\\Models\\bench.3ds", L"A Bench",20);
+		mModel1->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 0.0f, 12.0f, 0.0f);
+		mComponents.push_back(mModel1);
+		mDrawableComponents.push_back(mModel1);
 
 		//mModel2 = new ModelFromFile(*this, *mCamera, "Content\\Models\\bench.3ds", L"A tree", 10);
 		//mModel2->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 5.0f, 0.4f, 0.0f);
@@ -95,12 +97,7 @@ namespace Rendering
 
 		Game::Initialize();
 
-        mCamera->SetPosition(0.0f, 0.0f, 0.0f);
-
-		
-
-
-
+        mCamera->SetPosition(0.0f, 13.0f, 0.0f);
     }
 
     void RenderingGame::Shutdown()
@@ -116,7 +113,10 @@ namespace Rendering
 		DeleteObject(mMouse);
 		ReleaseObject(mDirectInput);
 		
-		//DeleteObject(mModel1);
+		for (auto comp : mDrawableComponents) 
+		{
+			DeleteObject(comp);
+		}
 		//DeleteObject(mModel2);
 	
 
@@ -138,6 +138,8 @@ namespace Rendering
     {
 
 		mFpsComponent->Update(gameTime);
+
+		
 		Game::Update(gameTime);
 		
 
@@ -149,62 +151,93 @@ namespace Rendering
 
 
 		//bounding box , we need to see if we need to do the picking test
-		/*if (Game::toPick)
-		{
-			
-			if (mModel1->Visible())
-				Pick(Game::screenX, Game::screenY, mModel1);
+		for (auto& component : mDrawableComponents) {
+			if (component->Taken()) {
+				mTakenObject = component;
+				component->Release();
+			}
+		}
 
-			if (mModel2->Visible())
-				Pick(Game::screenX, Game::screenY, mModel2);
-	
-			
-			
+		if (mTakenObject != nullptr) {
+			const auto& position = mCamera->Position();
+			const auto& direction = mCamera->Direction();
+			if (direction.x == 0 && direction.z == 0) {
+				mTakenObject->SetPosition(0.0f, -direction.y, 0.0f, 0.001f, position.x + direction.x, position.y + direction.y, position.z + direction.z);
+			}
+			else {
+				auto angle = atan2(direction.x, direction.z);
+				auto hype = sqrt(direction.x * direction.x + direction.z * direction.z);
+				auto angle2 = atan(direction.y / hype);
+				mTakenObject->SetPosition(-M_PI/2.0 + angle2, M_PI+angle, 0.0f, 0.001f, position.x + direction.x, position.y + direction.y, position.z + direction.z);
+
+
+			}
+		}
+		
+
+		if (Game::toPick)
+		{
+			for (auto& component : mDrawableComponents) {
+				if (component->Visible())
+					Pick(Game::screenX, Game::screenY, component);
+			}
 			Game::toPick = false;
-		}*/
+		}
 
 	}
 
 
 	// do the picking here
 
-	//void RenderingGame::Pick(int sx, int sy, ModelFromFile* model)
-	//{
-	//	//XMMATRIX P = mCam.Proj(); 
-	//	XMFLOAT4X4 P;
-	//	XMStoreFloat4x4(&P, mCamera->ProjectionMatrix());
-	//	//Compute picking ray in view space.
-	//	float vx = (+2.0f * sx / Game::DefaultScreenWidth - 1.0f) / P(0, 0);
-	//	float vy = (-2.0f * sy / Game::DefaultScreenHeight + 1.0f) / P(1, 1);
-	//	// Ray definition in view space.
-	//	XMVECTOR rayOrigin = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
-	//	XMVECTOR rayDir = XMVectorSet(vx, vy, -1.0f, 0.0f);
-	//	// Tranform ray to local space of Mesh via the inverse of both of view and world transform
-	//	XMMATRIX V = mCamera->ViewMatrix();
-	//	XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(V), V);
-	//	XMMATRIX W = XMLoadFloat4x4(model->WorldMatrix());
-	//	XMMATRIX invWorld = XMMatrixInverse(&XMMatrixDeterminant(W), W);
-	//	XMMATRIX toLocal = XMMatrixMultiply(invView, invWorld);
-	//	rayOrigin = XMVector3TransformCoord(rayOrigin, toLocal);
-	//	rayDir = XMVector3TransformNormal(rayDir, toLocal);
+	void RenderingGame::Pick(int sx, int sy, ModelFromFile* model)
+	{
+		//XMMATRIX P = mCam.Proj(); 
+		XMFLOAT4X4 P;
+		XMStoreFloat4x4(&P, mCamera->ProjectionMatrix());
 
-	//	// Make the ray direction unit length for the intersection tests.
-	//	rayDir = XMVector3Normalize(rayDir);
-	//	float tmin = 0.0;
-	//	if (model->mBoundingBox.Intersects(rayOrigin, rayDir, tmin))
-	//	{
-	//		std::wostringstream pickupString;
-	//		pickupString << L"Do you want to pick up: " << (model->GetModelDes()).c_str() << '\n' << '\t' << '+' << model->ModelValue() << L" points";
-	//		int result = MessageBox(0, pickupString.str().c_str(), L"Object Found", MB_ICONASTERISK | MB_YESNO);
 
-	//		//To make the object invisible after being picked, in the Pick function, add the following code:
-	//		if (result == IDYES)
-	//		{ //hide the object
-	//			mScore += model->ModelValue();
-	//			model->SetVisible(false);
-	//		}
-	//	}
-	//}
+		//Compute picking ray in view space.
+		float vx = (+2.0f*sx / Game::DefaultScreenWidth - 1.0f) / P(0, 0);
+		float vy = (-2.0f*sy / Game::DefaultScreenHeight + 1.0f) / P(1, 1);
+
+		// Ray definition in view space.
+		XMVECTOR rayOrigin = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
+		XMVECTOR rayDir = XMVectorSet(vx, vy, -1.0f, 0.0f);
+
+		// Tranform ray to local space of Mesh via the inverse of both of view and world transform
+		
+		XMMATRIX V = mCamera->ViewMatrix();
+		XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(V), V);
+
+		
+		XMMATRIX W = XMLoadFloat4x4(model->WorldMatrix());
+		XMMATRIX invWorld = XMMatrixInverse(&XMMatrixDeterminant(W), W);
+
+		XMMATRIX toLocal = XMMatrixMultiply(invView, invWorld);
+
+		rayOrigin = XMVector3TransformCoord(rayOrigin, toLocal);
+		rayDir = XMVector3TransformNormal(rayDir, toLocal);
+
+		// Make the ray direction unit length for the intersection tests.
+		rayDir =  XMVector3Normalize(rayDir);
+
+	
+	
+		float tmin = 0.0;
+		if (model->mBoundingBox.Intersects(rayOrigin, rayDir, tmin))
+		{
+			std::wostringstream pickupString;
+			pickupString << L"Do you want to pick up: " << (model->GetModelDes()).c_str()<<'\n'<<'\t'<<'+'<<model->ModelValue()<<L" points";
+			
+			int result = MessageBox(0, pickupString.str().c_str(), L"Object Found", MB_ICONASTERISK | MB_YESNO);
+
+			if (result == IDYES)
+			{ 
+				model->Take();
+			}
+		
+		}
+	}
 	
 
 	

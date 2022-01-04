@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/
+/PaintingAMystery/myGame/build/.vs/
+*.ipch
+*.tlog
+/PaintingAMystery/myGame/source/Library/Debug/
+*lib

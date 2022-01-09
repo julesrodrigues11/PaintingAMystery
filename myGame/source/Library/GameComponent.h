@@ -28,6 +28,7 @@ namespace Library
         Game* mGame;
         bool mEnabled;
 
+
     private:
         GameComponent(const GameComponent& rhs);
         GameComponent& operator=(const GameComponent& rhs);

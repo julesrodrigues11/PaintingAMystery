@@ -147,14 +147,13 @@ namespace Library
 
         fixedRight = XMVector3Normalize(XMVector3Cross(XMLoadFloat3(&mStraightDirection), XMLoadFloat3(&Vector3Helper::Up)));
 
-
         XMVECTOR strafe = fixedRight * XMVectorGetX(movement);
         position += strafe;
 
         XMVECTOR forward = XMLoadFloat3(&mStraightDirection) * XMVectorGetZ(movement);
         position += forward;
 
-        XMStoreFloat3(&mPosition, position);
+        //XMStoreFloat3(&mPosition, position);
         /*
         //mPointLight->ApplyRotation(XMMatrixMultiply(pitchMatrix, yawMatrix));
 

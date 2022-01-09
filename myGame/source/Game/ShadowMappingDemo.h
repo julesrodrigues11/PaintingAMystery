@@ -45,13 +45,15 @@ namespace Rendering
 	{
 		RTTI_DECLARATIONS(ShadowMappingDemo, DrawableGameComponent)
 
-	public:		
+	public:
 		ShadowMappingDemo(Game& game, Camera& camera);
 		~ShadowMappingDemo();
 
 		virtual void Initialize() override;
 		virtual void Update(const GameTime& gameTime) override;
 		virtual void Draw(const GameTime& gameTime) override;
+		void ApplyRotation(XMMATRIX rotationMatrix);
+		void SetPosition(XMFLOAT3 newPosition);
 
 	private:
 		ShadowMappingDemo();
@@ -85,10 +87,10 @@ namespace Rendering
 		Projector* mProjector;
 		Frustum mProjectorFrustum;
 		RenderableFrustum* mRenderableProjectorFrustum;
-		
+
 		ID3D11Buffer* mPlanePositionVertexBuffer;
 		ID3D11Buffer* mPlanePositionUVNormalVertexBuffer;
-		ID3D11Buffer* mPlaneIndexBuffer;		
+		ID3D11Buffer* mPlaneIndexBuffer;
 		UINT mPlaneVertexCount;
 		XMFLOAT4X4 mPlaneWorldMatrix;
 		ID3D11ShaderResourceView* mCheckerboardTexture;
@@ -98,9 +100,9 @@ namespace Rendering
 
 
 		Effect* mShadowMappingEffect;
-		ShadowMappingMaterial * mShadowMappingMaterial;
+		ShadowMappingMaterial* mShadowMappingMaterial;
 		ID3D11Buffer* mModelPositionVertexBuffer;
-		ID3D11Buffer* mModelPositionUVNormalVertexBuffer;		
+		ID3D11Buffer* mModelPositionUVNormalVertexBuffer;
 		ID3D11Buffer* mModelIndexBuffer;
 		UINT mModelIndexCount;
 		XMFLOAT4X4 mModelWorldMatrix;

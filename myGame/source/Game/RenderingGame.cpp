@@ -24,10 +24,11 @@ namespace Rendering
 
 	const XMFLOAT4 RenderingGame::BackgroundColor = { 0.75f, 0.75f, 0.75f, 1.0f };
 
+
 	RenderingGame::RenderingGame(HINSTANCE instance, const std::wstring& windowClass, const std::wstring& windowTitle, int showCommand)
 		: Game(instance, windowClass, windowTitle, showCommand),
-		mDirectInput(nullptr), mKeyboard(nullptr), mMouse(nullptr),
-		mFpsComponent(nullptr), mRenderStateHelper(nullptr), mShadowMappingDemo(nullptr)
+		mDirectInput(nullptr), keyboard(nullptr), mouse(nullptr),
+		mFpsComponent(nullptr), mRenderStateHelper(nullptr), shadowMapping(nullptr)
 		/*mDemo(nullptr), mDirectInput(nullptr), mKeyboard(nullptr), mMouse(nullptr), mModel1(nullptr), mModel2(nullptr),
 		mFpsComponent(nullptr), mRenderStateHelper(nullptr), mObjectDiffuseLight(nullptr)*/
     {
@@ -41,9 +42,15 @@ namespace Rendering
 
     void RenderingGame::Initialize()
     {	
-        mCamera = new FirstPersonCamera(*this);
-        mComponents.push_back(mCamera);
-        mServices.AddService(Camera::TypeIdClass(), mCamera);
+		gameState = GameState::Game;
+        camera = new FirstPersonCamera(*this);
+        mComponents.push_back(camera);
+        mServices.AddService(Camera::TypeIdClass(), camera);
+
+		currentPosition = XMFLOAT3(0.0f, 0.0f, 0.0f);
+		rightVector = XMFLOAT3(1.0f, 0.0f, 0.0f);
+		forwardVector = XMFLOAT3(0.0f, 0.0f, -1.0f);
+		upVector = Up;
     
         //mDemo = new TriangleDemo(*this, *mCamera);
        // mComponents.push_back(mDemo);
@@ -56,17 +63,17 @@ namespace Rendering
 			throw GameException("DirectInput8Create() failed");
 		}
 
-		mKeyboard = new Keyboard(*this, mDirectInput);
-		mComponents.push_back(mKeyboard);
-		mServices.AddService(Keyboard::TypeIdClass(), mKeyboard);
+		keyboard = new Keyboard(*this, mDirectInput);
+		mComponents.push_back(keyboard);
+		mServices.AddService(Keyboard::TypeIdClass(), keyboard);
 
-		mMouse = new Mouse(*this, mDirectInput);
-		mComponents.push_back(mMouse);
-		mServices.AddService(Mouse::TypeIdClass(), mMouse);
+		mouse = new Mouse(*this, mDirectInput);
+		mComponents.push_back(mouse);
+		mServices.AddService(Mouse::TypeIdClass(), mouse);
 
 		
 		
-		auto mModel1 = new ModelFromFile(*this, *mCamera, "Content\\Models\\bench.3ds", L"A Bench",20);
+		auto mModel1 = new ModelFromFile(*this, *camera, "Content\\Models\\bench.3ds", L"A Bench",20);
 		mModel1->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 0.0f, 12.0f, 0.0f);
 		mComponents.push_back(mModel1);
 		mPickableComponents.push_back(mModel1);
@@ -83,12 +90,12 @@ namespace Rendering
 		//RasterizerStates::Initialize(mDirect3DDevice);
 		//SamplerStates::Initialize(mDirect3DDevice);
 
-		mShadowMappingDemo = new ShadowMappingDemo(*this, *mCamera);
+		shadowMapping = new ShadowMappingDemo(*this, *camera);
 		//mShadowMappingDemo->Initialise();
-		mComponents.push_back(mShadowMappingDemo);
+		mComponents.push_back(shadowMapping);
 
-		mPlayer = new Player(*this, *mKeyboard, *mMouse, *mCamera, *mShadowMappingDemo);
-		mComponents.push_back(mPlayer);
+		//mPlayer = new Player(*this, *keyboard, *mouse, *camera, *shadowMapping);
+		//mComponents.push_back(mPlayer);
 	
 		mFpsComponent = new FpsComponent(*this);
 		mFpsComponent->Initialize();
@@ -102,7 +109,7 @@ namespace Rendering
 		Game::Initialize();
 
 		auto gameStartPosition = XMFLOAT3(0.0f, 13.0f, 0.0f);
-		mPlayer->ResetPosition(gameStartPosition);
+		ResetPosition(gameStartPosition);
         //mCamera->SetPosition(0.0f, 13.0f, 0.0f);
     }
 
@@ -112,11 +119,11 @@ namespace Rendering
 
 		
 		//DeleteObject(mDemo);
-        DeleteObject(mCamera);
+        DeleteObject(camera);
 		
 		
-		DeleteObject(mKeyboard);
-		DeleteObject(mMouse);
+		DeleteObject(keyboard);
+		DeleteObject(mouse);
 		//DeleteObject(mPlayer);
 		ReleaseObject(mDirectInput);
 		
@@ -132,7 +139,7 @@ namespace Rendering
 
 		//DeleteObject(mObjectDiffuseLight);
 
-		DeleteObject(mShadowMappingDemo);
+		DeleteObject(shadowMapping);
 		
 		DeleteObject(mSpriteFont);
 		DeleteObject(mSpriteBatch);
@@ -141,13 +148,133 @@ namespace Rendering
         Game::Shutdown();
     }
 
-    void RenderingGame::Update(const GameTime &gameTime)
+	void RenderingGame::Update(const GameTime& gameTime)
+	{
+		if (gameState == GameState::Game) {
+			UpdatePosition(gameTime);
+			DrawGame(gameTime);
+		}
+		else if (gameState == GameState::Menu) {
+			DrawMenu(gameTime);
+		}
+	}
+
+	void RenderingGame::UpdatePosition(const GameTime& gameTime) {
+		//const XMFLOAT3 Vector3Helper::Forward = XMFLOAT3(0.0f, 0.0f, -1.0f);
+		XMFLOAT3 movementAmount = XMFLOAT3(0.0f, 0.0f, 0.0f);
+
+		if (keyboard != nullptr)
+		{
+			if (keyboard->IsKeyDown(DIK_W))
+			{
+				movementAmount.z = 1.0f;
+			}
+
+			if (keyboard->IsKeyDown(DIK_S))
+			{
+				movementAmount.z = -1.0f;
+			}
+
+			if (keyboard->IsKeyDown(DIK_A))
+			{
+				movementAmount.x = -1.0f;
+			}
+
+			if (keyboard->IsKeyDown(DIK_D))
+			{
+				movementAmount.x = 1.0f;
+			}
+		}
+
+		XMFLOAT2 rotationAmount = XMFLOAT2(0.0f, 0.0f);
+
+
+		if ((mouse != nullptr) && (mouse->IsButtonHeldDown(MouseButtonsLeft)))
+		{
+			LPDIMOUSESTATE mouseState = mouse->CurrentState();
+			rotationAmount.x = -mouseState->lX * 100.0f;
+			rotationAmount.y = -mouseState->lY * 100.0f;
+		}
+		float elapsedTime = (float)gameTime.ElapsedGameTime();
+		ApplyRotation(elapsedTime, rotationAmount);
+		Move(elapsedTime, movementAmount);
+	}
+
+	void RenderingGame::ApplyRotation(float elapsedTime, XMFLOAT2 rotation) {
+		if (rotation.x != 0 || rotation.y != 0) {
+			XMVECTOR rotationVector = XMLoadFloat2(&rotation) * DefaultRotationRate * elapsedTime;
+			XMVECTOR forward = XMLoadFloat3(&forwardVector);
+			XMVECTOR right = XMLoadFloat3(&rightVector);
+			XMVECTOR up = XMLoadFloat3(&upVector);
+
+			XMMATRIX pitchMatrix = XMMatrixRotationAxis(right, XMVectorGetY(rotationVector));
+			XMMATRIX yawMatrix = XMMatrixRotationY(XMVectorGetX(rotationVector));
+
+
+			auto rotationMatrix = XMMatrixMultiply(pitchMatrix, yawMatrix);
+
+			up = XMVector3TransformNormal(up, rotationMatrix);
+			up = XMVector3Normalize(up);
+
+			forward = XMVector3TransformNormal(forward, rotationMatrix);
+			forward = XMVector3Normalize(forward);
+
+			right = XMVector3Cross(forward, up);
+
+			//XMVector3TransformNormal(right, rotationMatrix);
+			// right = XMVector3Normalize(right);
+
+			XMStoreFloat3(&forwardVector, forward);
+			XMStoreFloat3(&upVector, up);
+			XMStoreFloat3(&rightVector, right);
+			shadowMapping->SetRotation(forwardVector, upVector, rightVector);
+			camera->SetRotation(forwardVector, upVector, rightVector);
+		}
+	}
+
+	void RenderingGame::Move(float elapsedTime, XMFLOAT3 movementAmount) {
+		if (movementAmount.x != 0 || movementAmount.y != 0 || movementAmount.z != 0) {
+			XMVECTOR position = XMLoadFloat3(&currentPosition);
+			XMVECTOR movement = XMLoadFloat3(&movementAmount) * DefaultMovementRate * elapsedTime;
+
+			auto mStraightDirection = forwardVector;
+			mStraightDirection.y = 0;
+
+			XMStoreFloat3(&mStraightDirection, XMVector3Normalize(XMLoadFloat3(&mStraightDirection)));
+			XMVECTOR fixedRight;
+
+			fixedRight = XMVector3Normalize(XMVector3Cross(XMLoadFloat3(&mStraightDirection), XMLoadFloat3(&Up)));
+
+
+			XMVECTOR strafe = fixedRight * XMVectorGetX(movement);
+			position += strafe;
+
+			XMVECTOR forward = XMLoadFloat3(&mStraightDirection) * XMVectorGetZ(movement);
+			position += forward;
+
+			XMStoreFloat3(&currentPosition, position);
+			camera->SetPosition(currentPosition);
+			shadowMapping->SetPosition(currentPosition);
+		}
+	}
+
+	void RenderingGame::ResetPosition(const XMFLOAT3 & position) {
+		currentPosition = position;
+		camera->SetPosition(position);
+		shadowMapping->SetPosition(currentPosition);
+	}
+
+	void RenderingGame::DrawMenu(const GameTime& gameTime)
+	{
+	}
+
+    void RenderingGame::DrawGame(const GameTime &gameTime)
     {
 
 		mFpsComponent->Update(gameTime);
 		Game::Update(gameTime);
 		//Add "ESC" to exit the application
-		if (mKeyboard->WasKeyPressedThisFrame(DIK_ESCAPE))
+		if (keyboard->WasKeyPressedThisFrame(DIK_ESCAPE))
 		{
 			Exit();
 		}
@@ -162,8 +289,8 @@ namespace Rendering
 		}
 
 		if (mTakenObject != nullptr) {
-			const auto& position = mCamera->Position();
-			const auto& direction = mCamera->Direction();
+			const auto& position = camera->Position();
+			const auto& direction = camera->Direction();
 			if (direction.x == 0 && direction.z == 0) {
 				mTakenObject->SetPosition(0.0f, -direction.y, 0.0f, 0.001f, position.x + direction.x, position.y + direction.y, position.z + direction.z);
 			}
@@ -177,7 +304,6 @@ namespace Rendering
 			}
 		}
 		
-
 		if (Game::toPick)
 		{
 			for (auto& component : mPickableComponents) {
@@ -196,7 +322,7 @@ namespace Rendering
 	{
 		//XMMATRIX P = mCam.Proj(); 
 		XMFLOAT4X4 P;
-		XMStoreFloat4x4(&P, mCamera->ProjectionMatrix());
+		XMStoreFloat4x4(&P, camera->ProjectionMatrix());
 
 
 		//Compute picking ray in view space.
@@ -209,7 +335,7 @@ namespace Rendering
 
 		// Tranform ray to local space of Mesh via the inverse of both of view and world transform
 		
-		XMMATRIX V = mCamera->ViewMatrix();
+		XMMATRIX V = camera->ViewMatrix();
 		XMMATRIX invView = XMMatrixInverse(&XMMatrixDeterminant(V), V);
 
 		

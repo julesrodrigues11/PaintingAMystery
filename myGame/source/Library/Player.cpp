@@ -129,7 +129,7 @@ namespace Library
            // right = XMVector3Normalize(right);
 
             XMStoreFloat3(&forwardVector, forward);
-            XMStoreFloat3(&upVector, up);
+            XMStoreFloat3(&upVector, forward);
             XMStoreFloat3(&rightVector, right);
             shadowMapping->SetRotation(forwardVector, upVector, rightVector);
             camera->SetRotation(forwardVector, upVector, rightVector);

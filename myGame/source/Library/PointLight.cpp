@@ -27,42 +27,42 @@ namespace Library
 
 	XMFLOAT3& PointLight::Position()
 	{
-		return mPosition;
+		return currentPosition;
 	}
 
 	const XMFLOAT3& PointLight::Direction() const
 	{
-		return mDirection;
+		return forwardVector;
 	}
 
 	const XMFLOAT3& PointLight::Up() const
 	{
-		return mUp;
+		return upVector;
 	}
 
 	const XMFLOAT3& PointLight::Right() const
 	{
-		return mRight;
+		return rightVector;
 	}
 
 	XMVECTOR PointLight::PositionVector() const
 	{
-		return XMLoadFloat3(&mPosition);
+		return XMLoadFloat3(&currentPosition);
 	}
 
 	XMVECTOR PointLight::DirectionVector() const
 	{
-		return XMLoadFloat3(&mDirection);
+		return XMLoadFloat3(&forwardVector);
 	}
 
 	XMVECTOR PointLight::UpVector() const
 	{
-		return XMLoadFloat3(&mUp);
+		return XMLoadFloat3(&upVector);
 	}
 
 	XMVECTOR PointLight::RightVector() const
 	{
-		return XMLoadFloat3(&mRight);
+		return XMLoadFloat3(&rightVector);
 	}
 
 	XMMATRIX PointLight::ViewMatrix() const
@@ -96,12 +96,12 @@ namespace Library
 
     void PointLight::SetPosition(FXMVECTOR position)
     {
-        XMStoreFloat3(&mPosition, position);
+        XMStoreFloat3(&currentPosition, position);
     }
 
     void PointLight::SetPosition(const XMFLOAT3& position)
     {
-        mPosition = position;
+        currentPosition = position;
     }
 
 	void PointLight::SetRadius(float value)
@@ -117,9 +117,9 @@ namespace Library
 
 	void PointLight::UpdateViewMatrix()
 	{
-		XMVECTOR eyePosition = XMLoadFloat3(&mPosition);
-		XMVECTOR direction = XMLoadFloat3(&mDirection);
-		XMVECTOR upDirection = XMLoadFloat3(&mUp);
+		XMVECTOR eyePosition = XMLoadFloat3(&currentPosition);
+		XMVECTOR direction = XMLoadFloat3(&forwardVector);
+		XMVECTOR upDirection = XMLoadFloat3(&upVector);
 
 		XMMATRIX viewMatrix = XMMatrixLookToRH(eyePosition, direction, upDirection);
 		XMStoreFloat4x4(&mViewMatrix, viewMatrix);
@@ -135,8 +135,8 @@ namespace Library
 
 	void PointLight::ApplyRotation(CXMMATRIX transform)
 	{
-		XMVECTOR direction = XMLoadFloat3(&mDirection);
-		XMVECTOR up = XMLoadFloat3(&mUp);
+		XMVECTOR direction = XMLoadFloat3(&forwardVector);
+		XMVECTOR up = XMLoadFloat3(&upVector);
 
 		direction = XMVector3TransformNormal(direction, transform);
 		direction = XMVector3Normalize(direction);
@@ -147,9 +147,9 @@ namespace Library
 		XMVECTOR right = XMVector3Cross(direction, up);
 		up = XMVector3Cross(right, direction);
 
-		XMStoreFloat3(&mDirection, direction);
-		XMStoreFloat3(&mUp, up);
-		XMStoreFloat3(&mRight, right);
+		XMStoreFloat3(&forwardVector, direction);
+		XMStoreFloat3(&upVector, up);
+		XMStoreFloat3(&rightVector, right);
 	}
 
 	void PointLight::ApplyRotation(const XMFLOAT4X4& transform)

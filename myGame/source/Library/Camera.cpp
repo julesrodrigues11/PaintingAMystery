@@ -32,42 +32,42 @@ namespace Library
     
     const XMFLOAT3& Camera::Position() const
     {
-        return mPosition;
+        return currentPosition;
     }
 
     const XMFLOAT3& Camera::Direction() const
     {
-        return mDirection;
+        return forwardVector;
     }
     
     const XMFLOAT3& Camera::Up() const
     {
-        return mUp;
+        return upVector;
     }
 
     const XMFLOAT3& Camera::Right() const
     {
-        return mRight;
+        return rightVector;
     }
 
     XMVECTOR Camera::PositionVector() const
     {
-        return XMLoadFloat3(&mPosition);
+        return XMLoadFloat3(&currentPosition);
     }
 
     XMVECTOR Camera::DirectionVector() const
     {
-        return XMLoadFloat3(&mDirection);
+        return XMLoadFloat3(&forwardVector);
     }
 
     XMVECTOR Camera::UpVector() const
     {
-        return XMLoadFloat3(&mUp);
+        return XMLoadFloat3(&upVector);
     }
     
     XMVECTOR Camera::RightVector() const
     {
-        return XMLoadFloat3(&mRight);
+        return XMLoadFloat3(&rightVector);
     }
 
     float Camera::AspectRatio() const
@@ -108,7 +108,7 @@ namespace Library
         return XMMatrixMultiply(viewMatrix, projectionMatrix);
     }
 
-    void Camera::SetPosition(FLOAT x, FLOAT y, FLOAT z)
+   /* void Camera::SetPosition(FLOAT x, FLOAT y, FLOAT z)
     {
         XMVECTOR position = XMVectorSet(x, y, z, 1.0f);
         SetPosition(position);
@@ -117,19 +117,19 @@ namespace Library
     void Camera::SetPosition(FXMVECTOR position)
     {
         XMStoreFloat3(&mPosition, position);
-    }
+    }*/
 
-    void Camera::SetPosition(const XMFLOAT3& position)
-    {
-        mPosition = position;
-    }
+  //  void Camera::SetPosition(const XMFLOAT3& position)
+  //  {
+  //      mPosition = position;
+  //  }
 
     void Camera::Reset()
     {
-        mPosition = Vector3Helper::Zero;
-        mDirection = Vector3Helper::Forward;
-        mUp = Vector3Helper::Up;
-        mRight = Vector3Helper::Right;
+        currentPosition = Vector3Helper::Zero;
+        forwardVector = Vector3Helper::Forward;
+        upVector = Vector3Helper::Up;
+        rightVector = Vector3Helper::Right;
         
         UpdateViewMatrix();
     }
@@ -147,9 +147,9 @@ namespace Library
 
     void Camera::UpdateViewMatrix()
     {
-        XMVECTOR eyePosition = XMLoadFloat3(&mPosition);
-        XMVECTOR direction = XMLoadFloat3(&mDirection);
-        XMVECTOR upDirection = XMLoadFloat3(&mUp);
+        XMVECTOR eyePosition = XMLoadFloat3(&currentPosition);
+        XMVECTOR direction = XMLoadFloat3(&forwardVector);
+        XMVECTOR upDirection = XMLoadFloat3(&upVector);
 
         XMMATRIX viewMatrix = XMMatrixLookToRH(eyePosition, direction, upDirection);
         XMStoreFloat4x4(&mViewMatrix, viewMatrix);
@@ -163,8 +163,8 @@ namespace Library
 
     void Camera::ApplyRotation(CXMMATRIX transform)
     {
-        XMVECTOR direction = XMLoadFloat3(&mDirection);
-        XMVECTOR up = XMLoadFloat3(&mUp);
+        XMVECTOR direction = XMLoadFloat3(&forwardVector);
+        XMVECTOR up = XMLoadFloat3(&upVector);
         
         direction = XMVector3TransformNormal(direction, transform);
         direction = XMVector3Normalize(direction);
@@ -175,9 +175,9 @@ namespace Library
         XMVECTOR right = XMVector3Cross(direction, up);
         up = XMVector3Cross(right, direction);
 
-        XMStoreFloat3(&mDirection, direction);
-        XMStoreFloat3(&mUp, up);
-        XMStoreFloat3(&mRight, right);
+        XMStoreFloat3(&forwardVector, direction);
+        XMStoreFloat3(&upVector, up);
+        XMStoreFloat3(&rightVector, right);
     }
 
     void Camera::ApplyRotation(const XMFLOAT4X4& transform)

@@ -130,16 +130,16 @@ namespace Library
 
         float elapsedTime = (float)gameTime.ElapsedGameTime();
         XMVECTOR rotationVector = XMLoadFloat2(&rotationAmount) * mRotationRate * elapsedTime;
-        XMVECTOR right = XMLoadFloat3(&mRight);
+        XMVECTOR right = XMLoadFloat3(&rightVector);
 
         XMMATRIX pitchMatrix = XMMatrixRotationAxis(right, XMVectorGetY(rotationVector));
         XMMATRIX yawMatrix = XMMatrixRotationY(XMVectorGetX(rotationVector));
 
-        ApplyRotation(XMMatrixMultiply(pitchMatrix, yawMatrix));
-        XMVECTOR position = XMLoadFloat3(&mPosition);
+        //ApplyRotation(XMMatrixMultiply(pitchMatrix, yawMatrix));
+        XMVECTOR position = XMLoadFloat3(&currentPosition);
         XMVECTOR movement = XMLoadFloat3(&movementAmount) * mMovementRate * elapsedTime;
 
-        auto mStraightDirection = mDirection;
+        auto mStraightDirection = forwardVector;
         mStraightDirection.y = 0;
 
         XMStoreFloat3(&mStraightDirection, XMVector3Normalize(XMLoadFloat3(&mStraightDirection)));

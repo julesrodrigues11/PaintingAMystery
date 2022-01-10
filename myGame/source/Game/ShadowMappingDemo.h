@@ -53,6 +53,7 @@ namespace Rendering
 		virtual void Update(const GameTime& gameTime) override;
 		virtual void Draw(const GameTime& gameTime) override;
 		void ApplyRotation(XMMATRIX rotationMatrix);
+		void SetRotation(const XMFLOAT3& forward, const XMFLOAT3& up, const XMFLOAT3& right);
 		void SetPosition(XMFLOAT3 newPosition);
 
 	private:

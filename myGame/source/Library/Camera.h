@@ -35,9 +35,8 @@ namespace Library
         XMMATRIX ProjectionMatrix() const;
         XMMATRIX ViewProjectionMatrix() const;
 
-        virtual void SetPosition(FLOAT x, FLOAT y, FLOAT z);
-        virtual void SetPosition(FXMVECTOR position);
-        virtual void SetPosition(const XMFLOAT3& position);
+        //virtual void SetPosition(FLOAT x, FLOAT y, FLOAT z);
+        //virtual void SetPosition(FXMVECTOR position);
 
         virtual void Reset();
         virtual void Initialize() override;

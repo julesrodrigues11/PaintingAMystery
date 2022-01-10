@@ -117,7 +117,6 @@ namespace Library
 
             auto rotationMatrix = XMMatrixMultiply(pitchMatrix, yawMatrix);
 
-           // auto up = XMVector3Cross(right, forward);
             up = XMVector3TransformNormal(up, rotationMatrix);
             up = XMVector3Normalize(up);
 
@@ -130,10 +129,10 @@ namespace Library
            // right = XMVector3Normalize(right);
 
             XMStoreFloat3(&forwardVector, forward);
+            XMStoreFloat3(&upVector, up);
             XMStoreFloat3(&rightVector, right);
-
-            shadowMapping->ApplyRotation(rotationMatrix);
-            camera->ApplyRotation(rotationMatrix);
+            shadowMapping->SetRotation(forwardVector, upVector, rightVector);
+            camera->SetRotation(forwardVector, upVector, rightVector);
         }
     }
 
@@ -158,7 +157,7 @@ namespace Library
             position += forward;
 
             XMStoreFloat3(&currentPosition, position);
-            camera->SetPosition(position);
+            camera->SetPosition(currentPosition);
             shadowMapping->SetPosition(currentPosition);
         }
     }

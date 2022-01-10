@@ -410,7 +410,6 @@ namespace Rendering
 			if (mKeyboard->IsKeyDown(DIK_PGUP) && ambientIntensity < UCHAR_MAX)
 			{
 				ambientIntensity += LightModulationRate * (float)gameTime.ElapsedGameTime();
-
 				mAmbientColor.a = (UCHAR)XMMin<float>(ambientIntensity, UCHAR_MAX);
 			}
 
@@ -433,7 +432,7 @@ namespace Rendering
 				specularIntensity += LightModulationRate * (float)gameTime.ElapsedGameTime();
 				specularIntensity = XMMin<float>(specularIntensity, UCHAR_MAX);
 
-				mSpecularPower = specularIntensity;;
+				mSpecularPower = specularIntensity;
 			}
 
 			if (mKeyboard->IsKeyDown(DIK_DELETE) && specularIntensity > 0)
@@ -565,15 +564,15 @@ namespace Rendering
 		XMVECTOR forward = mCamera->DirectionVector() * XMVectorGetY(movement);
 		position += forward;
 
-	 	mPointLight->SetPosition(mCamera->Position());
-		mProxyModel->SetPosition(mPointLight->Position());
-		mProjector->SetPosition(mPointLight->Position());
-		mProjector->ApplyRotation(mCamera->ProjectionMatrix());
+	 	//mPointLight->SetPosition(mCamera->Position());
+		//mProxyModel->SetPosition(mPointLight->Position());
+		//mProjector->SetPosition(mPointLight->Position());
+		//mProjector->ApplyRotation(mCamera->ProjectionMatrix());
 
-		mRenderableProjectorFrustum->SetPosition(mPointLight->Position());
+		//mRenderableProjectorFrustum->SetPosition(mPointLight->Position());
 		//mPointLight->SetPosition(mProjector->Position());
 
-		XMStoreFloat3(&mPointLight->Position(), position);
+		//XMStoreFloat3(&mPointLight->Position(), position);
 
 	}
 
@@ -583,6 +582,14 @@ namespace Rendering
 		mProjector->ApplyRotation(rotationMatrix);
 		mProxyModel->ApplyRotation(rotationMatrix);
 		mRenderableProjectorFrustum->ApplyRotation(rotationMatrix);
+	}
+
+	void ShadowMappingDemo::SetRotation(const XMFLOAT3& forward, const XMFLOAT3& up, const XMFLOAT3& right)
+	{
+		mPointLight->SetRotation(forward, up, right);
+		mProjector->SetRotation(forward, up, right);
+		mProxyModel->SetRotation(forward, up, right);
+		mRenderableProjectorFrustum->SetRotation(forward, up, right);
 	}
 
 	void ShadowMappingDemo::SetPosition(XMFLOAT3 newPosition)

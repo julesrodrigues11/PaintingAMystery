@@ -9,10 +9,6 @@ using namespace Library;
 namespace Library
 {
 	class Mesh;
-}
-
-namespace Rendering
-{
 	class ModelFromFile : public DrawableGameComponent
 	{
 		RTTI_DECLARATIONS(ModelFromFile, DrawableGameComponent)

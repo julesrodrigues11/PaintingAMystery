@@ -11,7 +11,7 @@
 
 using namespace DirectX;
 
-namespace Rendering
+namespace Library
 {
     RTTI_DEFINITIONS(ModelFromFile)
 

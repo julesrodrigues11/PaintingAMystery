@@ -2,6 +2,7 @@
 
 
 #include "Game.h"
+#include "../Library/Player.h"
 
 using namespace Library;
 
@@ -56,7 +57,7 @@ namespace Rendering
 		Keyboard* mKeyboard;
 		Mouse*    mMouse;
 		ModelFromFile* mTakenObject;
-		std::vector<ModelFromFile*> mDrawableComponents;
+		std::vector<ModelFromFile*> mPickableComponents;
 	
 		int mScore;
 		SpriteBatch* mSpriteBatch;
@@ -65,6 +66,7 @@ namespace Rendering
 		FpsComponent* mFpsComponent;
 		RenderStateHelper* mRenderStateHelper;
 		ShadowMappingDemo* mShadowMappingDemo;
+		Player* mPlayer;
 
 
 		ObjectDiffuseLight* mObjectDiffuseLight;

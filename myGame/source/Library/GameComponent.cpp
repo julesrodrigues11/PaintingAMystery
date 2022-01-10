@@ -46,4 +46,13 @@ namespace Library
     void GameComponent::Update(const GameTime& gameTime)
     {
     }
+
+    void GameComponent::SetPosition(const XMFLOAT3& currentPosition) {
+        this->currentPosition = currentPosition;
+    }
+    void GameComponent::SetRotation(const XMFLOAT3& forward, const XMFLOAT3& up, const XMFLOAT3& right) {
+        this->forwardVector = forward;
+        this->upVector = up;
+        this->rightVector = right;
+    }
 }

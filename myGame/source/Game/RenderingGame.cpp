@@ -69,7 +69,7 @@ namespace Rendering
 		auto mModel1 = new ModelFromFile(*this, *mCamera, "Content\\Models\\bench.3ds", L"A Bench",20);
 		mModel1->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 0.0f, 12.0f, 0.0f);
 		mComponents.push_back(mModel1);
-		mDrawableComponents.push_back(mModel1);
+		mPickableComponents.push_back(mModel1);
 
 		//mModel2 = new ModelFromFile(*this, *mCamera, "Content\\Models\\bench.3ds", L"A tree", 10);
 		//mModel2->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 5.0f, 0.4f, 0.0f);
@@ -84,7 +84,11 @@ namespace Rendering
 		//SamplerStates::Initialize(mDirect3DDevice);
 
 		mShadowMappingDemo = new ShadowMappingDemo(*this, *mCamera);
+		//mShadowMappingDemo->Initialise();
 		mComponents.push_back(mShadowMappingDemo);
+
+		mPlayer = new Player(*this, *mKeyboard, *mMouse, *mCamera, *mShadowMappingDemo);
+		mComponents.push_back(mPlayer);
 	
 		mFpsComponent = new FpsComponent(*this);
 		mFpsComponent->Initialize();
@@ -97,7 +101,9 @@ namespace Rendering
 
 		Game::Initialize();
 
-        mCamera->SetPosition(0.0f, 13.0f, 0.0f);
+		auto gameStartPosition = XMFLOAT3(0.0f, 13.0f, 0.0f);
+		mPlayer->ResetPosition(gameStartPosition);
+        //mCamera->SetPosition(0.0f, 13.0f, 0.0f);
     }
 
     void RenderingGame::Shutdown()
@@ -111,9 +117,10 @@ namespace Rendering
 		
 		DeleteObject(mKeyboard);
 		DeleteObject(mMouse);
+		//DeleteObject(mPlayer);
 		ReleaseObject(mDirectInput);
 		
-		for (auto comp : mDrawableComponents) 
+		for (auto comp : mPickableComponents) 
 		{
 			DeleteObject(comp);
 		}
@@ -138,11 +145,7 @@ namespace Rendering
     {
 
 		mFpsComponent->Update(gameTime);
-
-		
 		Game::Update(gameTime);
-		
-
 		//Add "ESC" to exit the application
 		if (mKeyboard->WasKeyPressedThisFrame(DIK_ESCAPE))
 		{
@@ -151,7 +154,7 @@ namespace Rendering
 
 
 		//bounding box , we need to see if we need to do the picking test
-		for (auto& component : mDrawableComponents) {
+		for (auto& component : mPickableComponents) {
 			if (component->Taken()) {
 				mTakenObject = component;
 				component->Release();
@@ -177,7 +180,7 @@ namespace Rendering
 
 		if (Game::toPick)
 		{
-			for (auto& component : mDrawableComponents) {
+			for (auto& component : mPickableComponents) {
 				if (component->Visible())
 					Pick(Game::screenX, Game::screenY, component);
 			}

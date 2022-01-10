@@ -70,42 +70,42 @@ namespace Library
 
 	const XMFLOAT3& RenderableFrustum::Position() const
     {
-        return mPosition;
+        return currentPosition;
     }
 
     const XMFLOAT3& RenderableFrustum::Direction() const
     {
-        return mDirection;
+        return forwardVector;
     }
     
     const XMFLOAT3& RenderableFrustum::Up() const
     {
-        return mUp;
+        return upVector;
     }
 
     const XMFLOAT3& RenderableFrustum::Right() const
     {
-        return mRight;
+        return rightVector;
     }
 
     XMVECTOR RenderableFrustum::PositionVector() const
     {
-        return XMLoadFloat3(&mPosition);
+        return XMLoadFloat3(&currentPosition);
     }
 
     XMVECTOR RenderableFrustum::DirectionVector() const
     {
-        return XMLoadFloat3(&mDirection);
+        return XMLoadFloat3(&forwardVector);
     }
 
     XMVECTOR RenderableFrustum::UpVector() const
     {
-        return XMLoadFloat3(&mUp);
+        return XMLoadFloat3(&upVector);
     }
     
     XMVECTOR RenderableFrustum::RightVector() const
     {
-        return XMLoadFloat3(&mRight);
+        return XMLoadFloat3(&rightVector);
     }
 
 	void RenderableFrustum::SetPosition(FLOAT x, FLOAT y, FLOAT z)
@@ -116,18 +116,18 @@ namespace Library
 
     void RenderableFrustum::SetPosition(FXMVECTOR position)
     {
-        XMStoreFloat3(&mPosition, position);
+        XMStoreFloat3(&currentPosition, position);
     }
 
     void RenderableFrustum::SetPosition(const XMFLOAT3& position)
     {
-        mPosition = position;
+        currentPosition = position;
     }
 
 	void RenderableFrustum::ApplyRotation(CXMMATRIX transform)
     {
-        XMVECTOR direction = XMLoadFloat3(&mDirection);
-        XMVECTOR up = XMLoadFloat3(&mUp);
+        XMVECTOR direction = XMLoadFloat3(&forwardVector);
+        XMVECTOR up = XMLoadFloat3(&upVector);
         
         direction = XMVector3TransformNormal(direction, transform);
         direction = XMVector3Normalize(direction);
@@ -138,9 +138,9 @@ namespace Library
         XMVECTOR right = XMVector3Cross(direction, up);
         up = XMVector3Cross(right, direction);
 
-        XMStoreFloat3(&mDirection, direction);
-        XMStoreFloat3(&mUp, up);
-        XMStoreFloat3(&mRight, right);
+        XMStoreFloat3(&forwardVector, direction);
+        XMStoreFloat3(&upVector, up);
+        XMStoreFloat3(&rightVector, right);
     }
 
     void RenderableFrustum::ApplyRotation(const XMFLOAT4X4& transform)
@@ -171,10 +171,10 @@ namespace Library
 	void RenderableFrustum::Update(const GameTime& gameTime)
 	{
 		XMMATRIX worldMatrix = XMMatrixIdentity();
-		MatrixHelper::SetForward(worldMatrix, mDirection);
-		MatrixHelper::SetUp(worldMatrix, mUp);
-		MatrixHelper::SetRight(worldMatrix, mRight);
-		MatrixHelper::SetTranslation(worldMatrix, mPosition);
+		MatrixHelper::SetForward(worldMatrix, forwardVector);
+		MatrixHelper::SetUp(worldMatrix, upVector);
+		MatrixHelper::SetRight(worldMatrix, rightVector);
+		MatrixHelper::SetTranslation(worldMatrix, currentPosition);
 
 		XMStoreFloat4x4(&mWorldMatrix, worldMatrix);
 	}

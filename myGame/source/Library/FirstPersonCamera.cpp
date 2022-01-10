@@ -130,16 +130,16 @@ namespace Library
 
         float elapsedTime = (float)gameTime.ElapsedGameTime();
         XMVECTOR rotationVector = XMLoadFloat2(&rotationAmount) * mRotationRate * elapsedTime;
-        XMVECTOR right = XMLoadFloat3(&mRight);
+        XMVECTOR right = XMLoadFloat3(&rightVector);
 
         XMMATRIX pitchMatrix = XMMatrixRotationAxis(right, XMVectorGetY(rotationVector));
         XMMATRIX yawMatrix = XMMatrixRotationY(XMVectorGetX(rotationVector));
 
-        ApplyRotation(XMMatrixMultiply(pitchMatrix, yawMatrix));
-        XMVECTOR position = XMLoadFloat3(&mPosition);
+        //ApplyRotation(XMMatrixMultiply(pitchMatrix, yawMatrix));
+        XMVECTOR position = XMLoadFloat3(&currentPosition);
         XMVECTOR movement = XMLoadFloat3(&movementAmount) * mMovementRate * elapsedTime;
 
-        auto mStraightDirection = mDirection;
+        auto mStraightDirection = forwardVector;
         mStraightDirection.y = 0;
 
         XMStoreFloat3(&mStraightDirection, XMVector3Normalize(XMLoadFloat3(&mStraightDirection)));
@@ -147,14 +147,13 @@ namespace Library
 
         fixedRight = XMVector3Normalize(XMVector3Cross(XMLoadFloat3(&mStraightDirection), XMLoadFloat3(&Vector3Helper::Up)));
 
-
         XMVECTOR strafe = fixedRight * XMVectorGetX(movement);
         position += strafe;
 
         XMVECTOR forward = XMLoadFloat3(&mStraightDirection) * XMVectorGetZ(movement);
         position += forward;
 
-        XMStoreFloat3(&mPosition, position);
+        //XMStoreFloat3(&mPosition, position);
         /*
         //mPointLight->ApplyRotation(XMMatrixMultiply(pitchMatrix, yawMatrix));
 

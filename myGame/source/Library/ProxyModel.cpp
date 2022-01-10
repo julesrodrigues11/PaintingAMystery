@@ -34,42 +34,42 @@ namespace Library
 
 	const XMFLOAT3& ProxyModel::Position() const
     {
-        return mPosition;
+        return currentPosition;
     }
 
     const XMFLOAT3& ProxyModel::Direction() const
     {
-        return mDirection;
+        return forwardVector;
     }
     
     const XMFLOAT3& ProxyModel::Up() const
     {
-        return mUp;
+        return upVector;
     }
 
     const XMFLOAT3& ProxyModel::Right() const
     {
-        return mRight;
+        return rightVector;
     }
 
     XMVECTOR ProxyModel::PositionVector() const
     {
-        return XMLoadFloat3(&mPosition);
+        return XMLoadFloat3(&currentPosition);
     }
 
     XMVECTOR ProxyModel::DirectionVector() const
     {
-        return XMLoadFloat3(&mDirection);
+        return XMLoadFloat3(&forwardVector);
     }
 
     XMVECTOR ProxyModel::UpVector() const
     {
-        return XMLoadFloat3(&mUp);
+        return XMLoadFloat3(&upVector);
     }
     
     XMVECTOR ProxyModel::RightVector() const
     {
-        return XMLoadFloat3(&mRight);
+        return XMLoadFloat3(&rightVector);
     }
 
 	bool& ProxyModel::DisplayWireframe()
@@ -85,18 +85,18 @@ namespace Library
 
     void ProxyModel::SetPosition(FXMVECTOR position)
     {
-        XMStoreFloat3(&mPosition, position);
+        XMStoreFloat3(&currentPosition, position);
     }
 
     void ProxyModel::SetPosition(const XMFLOAT3& position)
     {
-        mPosition = position;
+        currentPosition = position;
     }
 
 	void ProxyModel::ApplyRotation(CXMMATRIX transform)
     {
-        XMVECTOR direction = XMLoadFloat3(&mDirection);
-        XMVECTOR up = XMLoadFloat3(&mUp);
+        XMVECTOR direction = XMLoadFloat3(&forwardVector);
+        XMVECTOR up = XMLoadFloat3(&upVector);
         
         direction = XMVector3TransformNormal(direction, transform);
         direction = XMVector3Normalize(direction);
@@ -107,9 +107,9 @@ namespace Library
         XMVECTOR right = XMVector3Cross(direction, up);
         up = XMVector3Cross(right, direction);
 
-        XMStoreFloat3(&mDirection, direction);
-        XMStoreFloat3(&mUp, up);
-        XMStoreFloat3(&mRight, right);
+        XMStoreFloat3(&forwardVector, direction);
+        XMStoreFloat3(&upVector, up);
+        XMStoreFloat3(&rightVector, right);
     }
 
     void ProxyModel::ApplyRotation(const XMFLOAT4X4& transform)
@@ -139,10 +139,10 @@ namespace Library
 	void ProxyModel::Update(const GameTime& gameTime)
 	{
 		XMMATRIX worldMatrix = XMMatrixIdentity();
-		MatrixHelper::SetForward(worldMatrix, mDirection);
-		MatrixHelper::SetUp(worldMatrix, mUp);
-		MatrixHelper::SetRight(worldMatrix, mRight);
-		MatrixHelper::SetTranslation(worldMatrix, mPosition);
+		MatrixHelper::SetForward(worldMatrix, forwardVector);
+		MatrixHelper::SetUp(worldMatrix, upVector);
+		MatrixHelper::SetRight(worldMatrix, rightVector);
+		MatrixHelper::SetTranslation(worldMatrix, currentPosition);
 
 		XMStoreFloat4x4(&mWorldMatrix, XMLoadFloat4x4(&mScaleMatrix) * worldMatrix);
 	}

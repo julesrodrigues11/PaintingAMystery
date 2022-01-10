@@ -24,9 +24,16 @@ namespace Library
         virtual void Initialize();
         virtual void Update(const GameTime& gameTime);
 
+        void SetPosition(const XMFLOAT3& currentPosition);
+        void SetRotation(const XMFLOAT3& forward, const XMFLOAT3& up, const XMFLOAT3& right);
+
     protected:
         Game* mGame;
         bool mEnabled;
+        XMFLOAT3 currentPosition;
+        XMFLOAT3 forwardVector;
+        XMFLOAT3 rightVector;
+        XMFLOAT3 upVector;
 
     private:
         GameComponent(const GameComponent& rhs);

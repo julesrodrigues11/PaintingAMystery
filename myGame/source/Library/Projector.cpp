@@ -23,7 +23,7 @@ namespace Library
     Projector::Projector(Game& game, float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance)
         : GameComponent(game),
           mFieldOfView(fieldOfView), mAspectRatio(aspectRatio), mNearPlaneDistance(nearPlaneDistance), mFarPlaneDistance(farPlaneDistance),
-          mPosition(), mDirection(), mUp(), mRight(), mViewMatrix(), mProjectionMatrix()
+        mPosition(), mDirection(), mUp(), mRight(), mViewMatrix(), mProjectionMatrix()
     {
     }
 
@@ -33,42 +33,42 @@ namespace Library
     
     const XMFLOAT3& Projector::Position() const
     {
-        return mPosition;
+        return currentPosition;
     }
 
     const XMFLOAT3& Projector::Direction() const
     {
-        return mDirection;
+        return forwardVector;
     }
     
     const XMFLOAT3& Projector::Up() const
     {
-        return mUp;
+        return upVector;
     }
 
     const XMFLOAT3& Projector::Right() const
     {
-        return mRight;
+        return rightVector;
     }
 
     XMVECTOR Projector::PositionVector() const
     {
-        return XMLoadFloat3(&mPosition);
+        return XMLoadFloat3(&currentPosition);
     }
 
     XMVECTOR Projector::DirectionVector() const
     {
-        return XMLoadFloat3(&mDirection);
+        return XMLoadFloat3(&forwardVector);
     }
 
     XMVECTOR Projector::UpVector() const
     {
-        return XMLoadFloat3(&mUp);
+        return XMLoadFloat3(&upVector);
     }
     
     XMVECTOR Projector::RightVector() const
     {
-        return XMLoadFloat3(&mRight);
+        return XMLoadFloat3(&rightVector);
     }
 
     float Projector::AspectRatio() const
@@ -117,20 +117,20 @@ namespace Library
 
     void Projector::SetPosition(FXMVECTOR position)
     {
-        XMStoreFloat3(&mPosition, position);
+        XMStoreFloat3(&currentPosition, position);
     }
 
     void Projector::SetPosition(const XMFLOAT3& position)
     {
-        mPosition = position;
+        currentPosition = position;
     }
 
     void Projector::Reset()
     {
-        mPosition = Vector3Helper::Zero;
-        mDirection = Vector3Helper::Forward;
-        mUp = Vector3Helper::Up;
-        mRight = Vector3Helper::Right;
+        currentPosition = Vector3Helper::Zero;
+        forwardVector = Vector3Helper::Forward;
+        upVector = Vector3Helper::Up;
+        rightVector = Vector3Helper::Right;
         
         UpdateViewMatrix();
     }
@@ -148,9 +148,9 @@ namespace Library
 
     void Projector::UpdateViewMatrix()
     {
-        XMVECTOR eyePosition = XMLoadFloat3(&mPosition);
-        XMVECTOR direction = XMLoadFloat3(&mDirection);
-        XMVECTOR upDirection = XMLoadFloat3(&mUp);
+        XMVECTOR eyePosition = XMLoadFloat3(&currentPosition);
+        XMVECTOR direction = XMLoadFloat3(&forwardVector);
+        XMVECTOR upDirection = XMLoadFloat3(&upVector);
 
         XMMATRIX viewMatrix = XMMatrixLookToRH(eyePosition, direction, upDirection);
         XMStoreFloat4x4(&mViewMatrix, viewMatrix);
@@ -164,8 +164,8 @@ namespace Library
 
     void Projector::ApplyRotation(CXMMATRIX transform)
     {
-        XMVECTOR direction = XMLoadFloat3(&mDirection);
-        XMVECTOR up = XMLoadFloat3(&mUp);
+        XMVECTOR direction = XMLoadFloat3(&forwardVector);
+        XMVECTOR up = XMLoadFloat3(&upVector);
         
         direction = XMVector3TransformNormal(direction, transform);
         direction = XMVector3Normalize(direction);
@@ -176,9 +176,9 @@ namespace Library
         XMVECTOR right = XMVector3Cross(direction, up);
         up = XMVector3Cross(right, direction);
 
-        XMStoreFloat3(&mDirection, direction);
-        XMStoreFloat3(&mUp, up);
-        XMStoreFloat3(&mRight, right);
+        XMStoreFloat3(&forwardVector, direction);
+        XMStoreFloat3(&upVector, up);
+        XMStoreFloat3(&rightVector, right);
     }
 
     void Projector::ApplyRotation(const XMFLOAT4X4& transform)

@@ -80,7 +80,9 @@ namespace Library
 
         GameClock mGameClock;
         GameTime mGameTime;
-		std::vector<GameComponent*> mComponents;
+		std::vector<GameComponent*> gameComponents;
+		std::vector<GameComponent*> menuComponents;
+        std::vector<GameComponent*>* currentComponents;
 		ServiceContainer mServices;
 
         D3D_FEATURE_LEVEL mFeatureLevel;

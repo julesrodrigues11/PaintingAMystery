@@ -3,6 +3,7 @@
 #include "DrawableGameComponent.h"
 #include "Frustum.h"
 #include "RenderStateHelper.h"
+#include "SpotLight.h"
 #include "Camera.h"
 
 using namespace Library;
@@ -10,7 +11,6 @@ using namespace Library;
 namespace Library
 {
 	class Effect;
-	class PointLight;
 	class Keyboard;
 	class Mouse;
 	class ProxyModel;
@@ -55,6 +55,9 @@ namespace Rendering
 		void ApplyRotation(XMMATRIX rotationMatrix);
 		void SetRotation(const XMFLOAT3& forward, const XMFLOAT3& up, const XMFLOAT3& right);
 		void SetPosition(XMFLOAT3 newPosition);
+		XMFLOAT2 mousePosition;
+		Light* GetLight();
+
 
 	private:
 		ShadowMappingDemo();
@@ -80,12 +83,13 @@ namespace Rendering
 		Keyboard* mKeyboard;
 		Mouse* mMouse;
 		XMCOLOR mAmbientColor;
-		PointLight* mPointLight;
+		
 		XMCOLOR mSpecularColor;
 		float mSpecularPower;
 		ProxyModel* mProxyModel;
 		RenderStateHelper mRenderStateHelper;
 		Projector* mProjector;
+		PointLight* mPointLight;
 		Frustum mProjectorFrustum;
 		RenderableFrustum* mRenderableProjectorFrustum;
 
@@ -108,7 +112,7 @@ namespace Rendering
 		UINT mModelIndexCount;
 		XMFLOAT4X4 mModelWorldMatrix;
 		XMFLOAT4X4 mProjectedTextureScalingMatrix;
-
+		
 		Effect* mDepthMapEffect;
 		DepthMapMaterial* mDepthMapMaterial;
 		DepthMap* mDepthMap;

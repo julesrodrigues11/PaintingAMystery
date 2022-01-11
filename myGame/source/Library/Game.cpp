@@ -23,7 +23,7 @@ namespace Library
           mFrameRate(DefaultFrameRate), mIsFullScreen(false),
           mDepthStencilBufferEnabled(false), mMultiSamplingEnabled(false), mMultiSamplingCount(DefaultMultiSamplingCount), mMultiSamplingQualityLevels(0), 
           mDepthStencilBuffer(nullptr), mRenderTargetView(nullptr), mDepthStencilView(nullptr), mViewport(),
-		  mComponents(), mServices()
+		  gameComponents(), mServices()
     {
     }
 
@@ -128,7 +128,7 @@ namespace Library
 
 	const std::vector<GameComponent*>& Game::Components() const
     {
-        return mComponents;
+        return gameComponents;
     }
 
 	const ServiceContainer& Game::Services() const
@@ -190,7 +190,11 @@ namespace Library
 
     void Game::Initialize()
     {
-        for (GameComponent* component : mComponents)
+        for (GameComponent* component : gameComponents)
+        {
+            component->Initialize();
+        }
+        for (GameComponent* component : menuComponents)
         {
             component->Initialize();
         }
@@ -198,7 +202,7 @@ namespace Library
 
     void Game::Update(const GameTime& gameTime)
     {
-        for (GameComponent* component : mComponents)
+        for (GameComponent* component : *currentComponents)
         {
             if (component->Enabled())
             {
@@ -209,7 +213,7 @@ namespace Library
 
     void Game::Draw(const GameTime& gameTime)
     {
-        for (GameComponent* component : mComponents)
+        for (GameComponent* component : *currentComponents)
         {
             DrawableGameComponent* drawableGameComponent = component->As<DrawableGameComponent>();
             if (drawableGameComponent != nullptr && drawableGameComponent->Visible())
@@ -435,6 +439,10 @@ namespace Library
         {
             case WM_DESTROY:
                 PostQuitMessage(0);
+                return 0;
+            case WM_MOUSEMOVE:
+                Game::screenX = ((int)(short)LOWORD(lParam));
+                Game::screenY = ((int)(short)HIWORD(lParam));
                 return 0;
             case WM_MBUTTONDOWN:
 			case WM_RBUTTONDOWN:

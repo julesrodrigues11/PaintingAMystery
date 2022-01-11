@@ -10,6 +10,8 @@ namespace DirectX
 
 namespace Library
 {
+
+    enum class GameState { Menu, Game, Credentials, ExitButton, GameButton, CredentialsButton};
     class FpsComponent : public DrawableGameComponent
     {
         RTTI_DECLARATIONS(FpsComponent, DrawableGameComponent)
@@ -24,6 +26,8 @@ namespace Library
         virtual void Initialize() override;
         virtual void Update(const GameTime& gameTime) override;
         virtual void Draw(const GameTime& gameTime) override;
+        void setMenuMode(GameState state);
+        void setMousePosition(float x, float y);
 
     private:
         FpsComponent();
@@ -33,6 +37,8 @@ namespace Library
         SpriteBatch* mSpriteBatch;
         SpriteFont* mSpriteFont;
         XMFLOAT2 mTextPosition;
+        XMFLOAT2 mousePosition;
+        GameState gameState = GameState::Menu;
 
         int mFrameCount;
         int mFrameRate;

@@ -39,13 +39,13 @@ namespace Rendering
 	ShadowMappingDemo::ShadowMappingDemo(Game& game, Camera& camera)
 		: DrawableGameComponent(game, camera), mCheckerboardTexture(nullptr),
 		mPlanePositionVertexBuffer(nullptr), mPlanePositionUVNormalVertexBuffer(nullptr), mPlaneIndexBuffer(nullptr), mPlaneVertexCount(0),
-		mKeyboard(nullptr), mMouse(nullptr), mAmbientColor(1.0f, 1.0f, 1.0, 0.0f), mPointLight(nullptr),
+		mKeyboard(nullptr), mMouse(nullptr), mAmbientColor(1.0f, 1.0f, 1.0, 0.1f), mPointLight(nullptr),
 		mSpecularColor(1.0f, 1.0f, 1.0f, 0.0f), mSpecularPower(255.0f), mPlaneWorldMatrix(MatrixHelper::Identity), mProxyModel(nullptr),
 		mProjector(nullptr), mProjectorFrustum(XMMatrixIdentity()), mRenderableProjectorFrustum(nullptr),
 		mShadowMappingEffect(nullptr), mShadowMappingMaterial(nullptr),
 		mProjectedTextureScalingMatrix(MatrixHelper::Zero), mRenderStateHelper(game),
 		mModelPositionVertexBuffer(nullptr), mModelPositionUVNormalVertexBuffer(nullptr), mModelIndexBuffer(nullptr), mModelIndexCount(0),
-		mModelWorldMatrix(MatrixHelper::Identity), mDepthMapEffect(nullptr), mDepthMapMaterial(nullptr), mDepthMap(nullptr), mDrawDepthMap(true),
+		mModelWorldMatrix(MatrixHelper::Identity), mDepthMapEffect(nullptr), mDepthMapMaterial(nullptr), mDepthMap(nullptr), mDrawDepthMap(false),
 		mSpriteBatch(nullptr), mSpriteFont(nullptr), mTextPosition(0.0f, 40.0f), mActiveTechnique(ShadowMappingTechniqueSimple),
 		mDepthBiasState(nullptr), mDepthBias(0), mSlopeScaledDepthBias(2.0f), mFloorTexture(nullptr)
 	{
@@ -140,7 +140,7 @@ namespace Rendering
 
 
 		mPointLight = new PointLight(*mGame);
-		mPointLight->SetRadius(50.0f);
+		mPointLight->SetRadius(15.0f);
 		mPointLight->SetPosition(mCamera->Position());
 
 
@@ -315,14 +315,14 @@ namespace Rendering
 		}
 
 		std::wostringstream helpLabel;
-		helpLabel << L"Ambient Intensity (+PgUp/-PgDn): " << mAmbientColor.a << "\n";
+		/*helpLabel << L"Ambient Intensity (+PgUp/-PgDn): " << mAmbientColor.a << "\n";
 		helpLabel << L"Point Light Intensity (+Home/-End): " << mPointLight->Color().a << "\n";
 		helpLabel << L"Specular Power (+Insert/-Delete): " << mSpecularPower << "\n";
 		helpLabel << L"Move Projector/Light (8/2, 4/6, 3/9)\n";
 		helpLabel << L"Rotate Projector (Arrow Keys)\n";
 		helpLabel << L"Show Shadow Map (Enter): " << (mDrawDepthMap ? "Yes" : "No") << "\n";
-		helpLabel << std::setprecision(5) << L"Active Technique (Space): " << ShadowMappingDisplayNames[mActiveTechnique].c_str() << "\n";
-
+		helpLabel << std::setprecision(5) << L"Active Technique (Space): " << ShadowMappingDisplayNames[mActiveTechnique].c_str() << "\n";*/
+		helpLabel << L"Mouse coordinates: " << mousePosition.x << "; " << mousePosition.y << "\n";
 		if (mActiveTechnique == ShadowMappingTechniquePCF)
 		{
 			helpLabel << L"Depth Bias (+J/-K): " << (int)mDepthBias << "\n"
@@ -594,10 +594,16 @@ namespace Rendering
 
 	void ShadowMappingDemo::SetPosition(XMFLOAT3 newPosition)
 	{
-		mPointLight->SetPosition(newPosition);
+		
 		mProxyModel->SetPosition(newPosition);
 		mProjector->SetPosition(newPosition);
 		mRenderableProjectorFrustum->SetPosition(newPosition);
+		mPointLight->SetPosition(newPosition);
+	}
+
+	Light* ShadowMappingDemo::GetLight()
+	{
+		return mPointLight;
 	}
 
 	void ShadowMappingDemo::InitializeProjectedTextureScalingMatrix()

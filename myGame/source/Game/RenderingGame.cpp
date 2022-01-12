@@ -16,6 +16,7 @@
 //display score
 #include <SpriteFont.h>
 #include <sstream>
+#include <iostream>
 
 # define M_PI           3.14159265358979323846  /* pi */
 
@@ -40,123 +41,230 @@ namespace Rendering
     {
     }
 
-    void RenderingGame::Initialize()
-    {	
-		gameState = GameState::Game;
-        camera = new FirstPersonCamera(*this);
-        mComponents.push_back(camera);
-        mServices.AddService(Camera::TypeIdClass(), camera);
+	void RenderingGame::Initialize()
+	{
+		camera = new FirstPersonCamera(*this);
+		commonComponents.push_back(camera);
+		mServices.AddService(Camera::TypeIdClass(), camera);
 
 		currentPosition = XMFLOAT3(0.0f, 0.0f, 0.0f);
 		rightVector = XMFLOAT3(1.0f, 0.0f, 0.0f);
 		forwardVector = XMFLOAT3(0.0f, 0.0f, -1.0f);
 		upVector = Up;
-    
-        //mDemo = new TriangleDemo(*this, *mCamera);
-       // mComponents.push_back(mDemo);
+
+		//mDemo = new TriangleDemo(*this, *mCamera);
+	   // mComponents.push_back(mDemo);
 
 		//Remember that the component is a management class for all objects in the D3D rendering engine. 
 		//It provides a centralized place to create and release objects. 
-	    //NB: In C++ and other similar languages, to instantiate a class is to create an object.
+		//NB: In C++ and other similar languages, to instantiate a class is to create an object.
 		if (FAILED(DirectInput8Create(mInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (LPVOID*)&mDirectInput, nullptr)))
 		{
 			throw GameException("DirectInput8Create() failed");
 		}
 
-		keyboard = new Keyboard(*this, mDirectInput);
-		mComponents.push_back(keyboard);
-		mServices.AddService(Keyboard::TypeIdClass(), keyboard);
-
-		mouse = new Mouse(*this, mDirectInput);
-		mComponents.push_back(mouse);
-		mServices.AddService(Mouse::TypeIdClass(), mouse);
-
-		
-		
-		auto mModel1 = new ModelFromFile(*this, *camera, "Content\\Models\\bench.3ds", L"A Bench",20);
-		mModel1->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 0.0f, 12.0f, 0.0f);
-		mComponents.push_back(mModel1);
-		mPickableComponents.push_back(mModel1);
-
-		//mModel2 = new ModelFromFile(*this, *mCamera, "Content\\Models\\bench.3ds", L"A tree", 10);
-		//mModel2->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 5.0f, 0.4f, 0.0f);
-		//mComponents.push_back(mModel2);
-
-
-		//house object with diffuse lighting effect:
-		//mObjectDiffuseLight = new ObjectDiffuseLight(*this, *mCamera, "Content\\Models\\HepBurn_Sofa.3ds");
-		//mObjectDiffuseLight->SetPosition(-1.57f, -0.0f, -0.0f, 0.01f, -1.0f, 0.75f, -2.5f);
-		//mComponents.push_back(mObjectDiffuseLight);
-		//RasterizerStates::Initialize(mDirect3DDevice);
-		//SamplerStates::Initialize(mDirect3DDevice);
-
-		shadowMapping = new ShadowMappingDemo(*this, *camera);
-		//mShadowMappingDemo->Initialise();
-		mComponents.push_back(shadowMapping);
-
-		//mPlayer = new Player(*this, *keyboard, *mouse, *camera, *shadowMapping);
-		//mComponents.push_back(mPlayer);
-	
 		mFpsComponent = new FpsComponent(*this);
 		mFpsComponent->Initialize();
 		mRenderStateHelper = new RenderStateHelper(*this);
-		
-		
+
 		mSpriteBatch = new SpriteBatch(mDirect3DDeviceContext);
 		mSpriteFont = new SpriteFont(mDirect3DDevice, L"Content\\Fonts\\Arial_14_Regular.spritefont");
 
-
+		InitializeGame();
+		InitializeMenu();
+		InitializeCredentials();
 		Game::Initialize();
+
+		SetState(GameState::Menu);
+		
 
 		auto gameStartPosition = XMFLOAT3(0.0f, 13.0f, 0.0f);
 		ResetPosition(gameStartPosition);
-        //mCamera->SetPosition(0.0f, 13.0f, 0.0f);
-    }
+		nonGamePosition = { gameStartPosition, forwardVector, upVector, rightVector };
+		gamePosition = { gameStartPosition, forwardVector, upVector, rightVector };
 
-    void RenderingGame::Shutdown()
-    {
-		
+	}
+
+	void RenderingGame::InitializeGame() {
+		keyboard = new Keyboard(*this, mDirectInput);
+		commonComponents.push_back(keyboard);
+		mServices.AddService(Keyboard::TypeIdClass(), keyboard);
+
+		mouse = new Mouse(*this, mDirectInput);
+		commonComponents.push_back(mouse);
+		mServices.AddService(Mouse::TypeIdClass(), mouse);
+
+		shadowMapping = new ShadowMappingDemo(*this, *camera);
+		gameComponents.push_back(shadowMapping);
+
+		auto mModel1 = new ModelFromFile(*this, *camera, "Content\\Models\\bench.3ds", L"A Bench", 20);
+		mModel1->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 0.0f, 12.0f, -4.0f);
+		gameComponents.push_back(mModel1);
+		pickableComponents.push_back(mModel1);
+	}
+
+	void RenderingGame::InitializeMenu() {
+		/*
+				auto wall = new ModelFromFile(*this, *camera, "Content\\Models\\bench.3ds", L"A Bench", 20);
+				menuComponents.push_back(wall);
+
+				auto startButton = new ModelFromFile(*this, *camera, "Content\\Models\\bench.3ds", L"A Bench", 20);
+				menuComponents.push_back(startButton);
+
+				auto controlsButton = new ModelFromFile(*this, *camera, "Content\\Models\\bench.3ds", L"A Bench", 20);
+				menuComponents.push_back(controlsButton);
+
+				auto exitButton = new ModelFromFile(*this, *camera, "Content\\Models\\bench.3ds", L"A Bench", 20);
+				menuComponents.push_back(exitButton);
+		*/
 
 		
-		//DeleteObject(mDemo);
-        DeleteObject(camera);
+	}
+
+	void RenderingGame::InitializeCredentials() {
+		auto wallWithCredentials = new ModelFromFile(*this, *camera, "Content\\Models\\bench.3ds", L"A Bench", 20);
+		wallWithCredentials->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 0.0f, 13.0f, -4.0f);
+		credentialsComponents.push_back(wallWithCredentials);
+	}
+
+	void RenderingGame::SetState(const GameState& newState) {
+		if (gameState == GameState::Game && newState != GameState::Game) {
+			gamePosition = { currentPosition, forwardVector, upVector, rightVector };
+			ResetPosition(nonGamePosition[0]);
+			SetRotation(nonGamePosition[1], nonGamePosition[2], nonGamePosition[3]);
+		}
+		if (gameState != GameState::Game && newState == GameState::Game) {
+			ResetPosition(gamePosition[0]);
+			SetRotation(gamePosition[1], gamePosition[2], gamePosition[3]);
+		}
+		gameState = newState;
+		if (gameState == GameState::Game) {
+			gamePosition = { currentPosition, forwardVector, upVector, rightVector };
+		}
 		
-		
-		DeleteObject(keyboard);
-		DeleteObject(mouse);
-		//DeleteObject(mPlayer);
-		ReleaseObject(mDirectInput);
-		
-		for (auto comp : mPickableComponents) 
+		if (gameState == GameState::Menu) {
+			currentComponents = &menuComponents;
+		}
+		else if (gameState == GameState::Game) {
+			currentComponents = &gameComponents;
+		}
+		else if (gameState == GameState::Credentials) {
+			currentComponents = &credentialsComponents;
+		}
+	}
+
+	void RenderingGame::Shutdown()
+	{
+		for (auto comp : commonComponents)
 		{
 			DeleteObject(comp);
 		}
-		//DeleteObject(mModel2);
-	
+		for (auto comp : gameComponents)
+		{
+			DeleteObject(comp);
+		}
+		for (auto comp : credentialsComponents)
+		{
+			DeleteObject(comp);
+		}
+		
+		ReleaseObject(mDirectInput);
 
 		DeleteObject(mFpsComponent);
 		DeleteObject(mRenderStateHelper);
 
 		//DeleteObject(mObjectDiffuseLight);
 
-		DeleteObject(shadowMapping);
-		
 		DeleteObject(mSpriteFont);
 		DeleteObject(mSpriteBatch);
 
 
-        Game::Shutdown();
-    }
+		Game::Shutdown();
+	}
 
 	void RenderingGame::Update(const GameTime& gameTime)
 	{
+		if (keyboard->WasKeyPressedThisFrame(DIK_ESCAPE))
+		{
+			if (gameState == GameState::Credentials || gameState == GameState::Game) {
+				SetState(GameState::Menu);
+			}
+			else {
+				Exit();
+			}
+		}
+
 		if (gameState == GameState::Game) {
 			UpdatePosition(gameTime);
 			DrawGame(gameTime);
 		}
 		else if (gameState == GameState::Menu) {
+			UpdateMenu(gameTime);
 			DrawMenu(gameTime);
 		}
+		else if (gameState == GameState::Credentials) {
+			mFpsComponent->Update(gameTime);
+			Game::Update(gameTime);
+		}
+	}
+
+	void RenderingGame::UpdateMenu(const GameTime& gameTime) {
+		long x = Game::screenX, y = Game::screenY;
+		mFpsComponent->setMousePosition(x, y);
+
+		long buttonLeft = Game::ScreenWidth() / 3;
+		long buttonRight = 2 * buttonLeft;
+		long buttonInBetweenSpace = Game::ScreenHeight() / 10;
+		long buttonHeight = 2 * buttonInBetweenSpace;
+
+		enum class ButtonNumber { None, StartButton, CredentialsButton, QuitButton };
+
+		ButtonNumber mouseOnButton = ButtonNumber::None;
+
+		if (x >= buttonLeft && x <= buttonRight) {
+			y -= buttonInBetweenSpace;
+			if (y >= 0 && y <= 2 * buttonInBetweenSpace + 3 * buttonHeight) {
+				if (y <= buttonHeight) {
+					mouseOnButton = ButtonNumber::StartButton;
+				}
+				else if (y >= buttonHeight + buttonInBetweenSpace && y <= 2 * buttonHeight + buttonInBetweenSpace) {
+					mouseOnButton = ButtonNumber::CredentialsButton;
+				}
+				else if (y >= 2 * (buttonHeight + buttonInBetweenSpace)) {
+					mouseOnButton = ButtonNumber::QuitButton;
+				}
+			}
+		}
+
+		switch (mouseOnButton) {
+		case ButtonNumber::StartButton:
+			mFpsComponent->setMenuMode(GameState::GameButton); 
+			break;
+		case ButtonNumber::CredentialsButton:
+			mFpsComponent->setMenuMode(GameState::CredentialsButton);
+			break;
+		case ButtonNumber::QuitButton:
+			mFpsComponent->setMenuMode(GameState::ExitButton);
+			break;
+		case ButtonNumber::None:
+			mFpsComponent->setMenuMode(GameState::Menu);//turn off the lights
+		}
+
+		if ((mouse != nullptr) && (mouse->IsButtonDown(MouseButtonsLeft)))
+		{
+			switch (mouseOnButton) {
+			case ButtonNumber::StartButton:
+				SetState(GameState::Game);
+				break;
+			case ButtonNumber::CredentialsButton:
+				SetState(GameState::Credentials);
+				break;
+			case ButtonNumber::QuitButton:
+				Exit();
+				break;
+			}
+		}
+		
 	}
 
 	void RenderingGame::UpdatePosition(const GameTime& gameTime) {
@@ -253,35 +361,51 @@ namespace Rendering
 			position += forward;
 
 			XMStoreFloat3(&currentPosition, position);
-			camera->SetPosition(currentPosition);
+			
 			shadowMapping->SetPosition(currentPosition);
+			camera->SetPosition(currentPosition);
 		}
 	}
 
 	void RenderingGame::ResetPosition(const XMFLOAT3 & position) {
 		currentPosition = position;
 		camera->SetPosition(position);
-		shadowMapping->SetPosition(currentPosition);
+		shadowMapping->SetPosition(position);
+		
+	}
+
+	void RenderingGame::SetRotation(const XMFLOAT3& forward, const XMFLOAT3& up, const XMFLOAT3& right)
+	{
+		forwardVector = forward;
+		upVector = up;
+		rightVector = right;
+		camera->SetRotation(forward, up, right);
+		shadowMapping->SetRotation(forward, up, right);
+		
 	}
 
 	void RenderingGame::DrawMenu(const GameTime& gameTime)
 	{
+		mFpsComponent->Update(gameTime);
+		Game::Update(gameTime);
+
 	}
 
     void RenderingGame::DrawGame(const GameTime &gameTime)
     {
-
 		mFpsComponent->Update(gameTime);
 		Game::Update(gameTime);
-		//Add "ESC" to exit the application
-		if (keyboard->WasKeyPressedThisFrame(DIK_ESCAPE))
+
+		if (Game::toPick)
 		{
-			Exit();
+			for (auto& component : pickableComponents) {
+				if (component->Visible())
+					Pick(Game::screenX, Game::screenY, component);
+			}
+			Game::toPick = false;
 		}
-
-
-		//bounding box , we need to see if we need to do the picking test
-		for (auto& component : mPickableComponents) {
+		
+		for (auto& component : pickableComponents) {
 			if (component->Taken()) {
 				mTakenObject = component;
 				component->Release();
@@ -298,21 +422,11 @@ namespace Rendering
 				auto angle = atan2(direction.x, direction.z);
 				auto hype = sqrt(direction.x * direction.x + direction.z * direction.z);
 				auto angle2 = atan(direction.y / hype);
-				mTakenObject->SetPosition(-M_PI/2.0 + angle2, M_PI+angle, 0.0f, 0.001f, position.x + direction.x, position.y + direction.y, position.z + direction.z);
-
-
+				mTakenObject->SetPosition(-M_PI / 2.0 + angle2, M_PI + angle, 0.0f, 0.001f, position.x + direction.x, position.y + direction.y, position.z + direction.z);
 			}
 		}
 		
-		if (Game::toPick)
-		{
-			for (auto& component : mPickableComponents) {
-				if (component->Visible())
-					Pick(Game::screenX, Game::screenY, component);
-			}
-			Game::toPick = false;
-		}
-
+		
 	}
 
 
@@ -367,8 +481,6 @@ namespace Rendering
 		
 		}
 	}
-	
-
 	
 
     void RenderingGame::Draw(const GameTime &gameTime)

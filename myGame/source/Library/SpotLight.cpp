@@ -20,32 +20,32 @@ namespace Library
 
 	const XMFLOAT3& SpotLight::Direction() const
 	{
-		return mDirection;
+		return forwardVector;
 	}
 	
 	const XMFLOAT3& SpotLight::Up() const
 	{
-		return mUp;
+		return upVector;
 	}
 
 	const XMFLOAT3& SpotLight::Right() const
 	{
-		return mRight;
+		return rightVector;
 	}
 
 	XMVECTOR SpotLight::DirectionVector() const
 	{
-		return XMLoadFloat3(&mDirection);
+		return XMLoadFloat3(&forwardVector);
 	}
 
 	XMVECTOR SpotLight::UpVector() const
 	{
-		return XMLoadFloat3(&mUp);
+		return XMLoadFloat3(&upVector);
 	}
 	
 	XMVECTOR SpotLight::RightVector() const
 	{
-		return XMLoadFloat3(&mRight);
+		return XMLoadFloat3(&rightVector);
 	}
 
 	float SpotLight::InnerAngle()
@@ -70,8 +70,8 @@ namespace Library
 
 	void SpotLight::ApplyRotation(CXMMATRIX transform)
     {
-        XMVECTOR direction = XMLoadFloat3(&mDirection);
-        XMVECTOR up = XMLoadFloat3(&mUp);
+        XMVECTOR direction = XMLoadFloat3(&forwardVector);
+        XMVECTOR up = XMLoadFloat3(&upVector);
         
         direction = XMVector3TransformNormal(direction, transform);
         direction = XMVector3Normalize(direction);
@@ -82,9 +82,9 @@ namespace Library
         XMVECTOR right = XMVector3Cross(direction, up);
         up = XMVector3Cross(right, direction);
 
-        XMStoreFloat3(&mDirection, direction);
-        XMStoreFloat3(&mUp, up);
-        XMStoreFloat3(&mRight, right);
+        XMStoreFloat3(&forwardVector, direction);
+        XMStoreFloat3(&upVector, up);
+        XMStoreFloat3(&rightVector, right);
     }
 
     void SpotLight::ApplyRotation(const XMFLOAT4X4& transform)

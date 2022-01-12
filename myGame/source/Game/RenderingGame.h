@@ -4,6 +4,7 @@
 #include "Game.h"
 #include "../Library/Player.h"
 #include "../Library/ModelFromFile.h"
+#include "../Library/FpsComponent.h"
 
 using namespace Library;
 
@@ -33,7 +34,6 @@ namespace Rendering
 	const float DefaultMouseSensitivity = 100.0f;
 	const XMFLOAT3 Up = XMFLOAT3(0.0f, 1.0f, 0.0f);
 
-	enum class GameState {Menu, Game};
     //class TriangleDemo;
 	//class ModelFromFile;
 	class ObjectDiffuseLight;
@@ -45,12 +45,18 @@ namespace Rendering
         RenderingGame(HINSTANCE instance, const std::wstring& windowClass, const std::wstring& windowTitle, int showCommand);
         ~RenderingGame();
 
-        virtual void Initialize() override;		
+        virtual void Initialize() override;
+		void InitializeGame();
+		void InitializeMenu();
+		void InitializeCredentials();
+		void SetState(const GameState& newState);
         virtual void Update(const GameTime& gameTime) override;
+		void UpdateMenu(const GameTime& gameTime);
 		void UpdatePosition(const GameTime& gameTime);
 		void ApplyRotation(float elapsedTime, XMFLOAT2 rotation);
 		void Move(float elapsedTime, XMFLOAT3 movementAmount);
 		void ResetPosition(const XMFLOAT3& position);
+		void SetRotation(const XMFLOAT3& forward, const XMFLOAT3& up, const XMFLOAT3& right);
 		void DrawMenu(const GameTime& gameTime);
 		void DrawGame(const GameTime& gameTime);
         virtual void Draw(const GameTime& gameTime) override;
@@ -59,10 +65,14 @@ namespace Rendering
 
 	protected:
         virtual void Shutdown() override;
+		std::vector<XMFLOAT3> gamePosition;
+		std::vector<XMFLOAT3> nonGamePosition;
+
 		XMFLOAT3 currentPosition;
 		XMFLOAT3 forwardVector;
 		XMFLOAT3 rightVector;
 		XMFLOAT3 upVector;
+		XMFLOAT2 mousePosition;
 
 
     private:
@@ -77,7 +87,7 @@ namespace Rendering
 		Keyboard* keyboard;
 		Mouse*    mouse;
 		ModelFromFile* mTakenObject;
-		std::vector<ModelFromFile*> mPickableComponents;
+		std::vector<ModelFromFile*> pickableComponents;
 	
 		int mScore;
 		SpriteBatch* mSpriteBatch;

@@ -48,6 +48,7 @@ namespace Rendering
         virtual void Initialize() override;
 		void InitializeGame();
 		void InitializeMenu();
+		void InitializeCredentials();
 		void SetState(const GameState& newState);
         virtual void Update(const GameTime& gameTime) override;
 		void UpdateMenu(const GameTime& gameTime);
@@ -55,6 +56,7 @@ namespace Rendering
 		void ApplyRotation(float elapsedTime, XMFLOAT2 rotation);
 		void Move(float elapsedTime, XMFLOAT3 movementAmount);
 		void ResetPosition(const XMFLOAT3& position);
+		void SetRotation(const XMFLOAT3& forward, const XMFLOAT3& up, const XMFLOAT3& right);
 		void DrawMenu(const GameTime& gameTime);
 		void DrawGame(const GameTime& gameTime);
         virtual void Draw(const GameTime& gameTime) override;
@@ -63,6 +65,9 @@ namespace Rendering
 
 	protected:
         virtual void Shutdown() override;
+		std::vector<XMFLOAT3> gamePosition;
+		std::vector<XMFLOAT3> nonGamePosition;
+
 		XMFLOAT3 currentPosition;
 		XMFLOAT3 forwardVector;
 		XMFLOAT3 rightVector;

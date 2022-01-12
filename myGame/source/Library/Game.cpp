@@ -190,6 +190,10 @@ namespace Library
 
     void Game::Initialize()
     {
+        for (GameComponent* component : commonComponents)
+        {
+            component->Initialize();
+        }
         for (GameComponent* component : gameComponents)
         {
             component->Initialize();
@@ -198,16 +202,21 @@ namespace Library
         {
             component->Initialize();
         }
+        for (GameComponent* component : credentialsComponents)
+        {
+            component->Initialize();
+        }
     }
 
     void Game::Update(const GameTime& gameTime)
     {
+        for (GameComponent* component : commonComponents)
+        {
+            component->Update(gameTime);
+        }
         for (GameComponent* component : *currentComponents)
         {
-            if (component->Enabled())
-            {
-                component->Update(gameTime);
-            }
+            component->Update(gameTime);
         }
     }
 

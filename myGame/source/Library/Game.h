@@ -80,8 +80,10 @@ namespace Library
 
         GameClock mGameClock;
         GameTime mGameTime;
+		std::vector<GameComponent*> commonComponents;
 		std::vector<GameComponent*> gameComponents;
 		std::vector<GameComponent*> menuComponents;
+		std::vector<GameComponent*> credentialsComponents;
         std::vector<GameComponent*>* currentComponents;
 		ServiceContainer mServices;
 

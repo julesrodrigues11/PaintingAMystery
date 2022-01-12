@@ -44,7 +44,7 @@ namespace Rendering
 	void RenderingGame::Initialize()
 	{
 		camera = new FirstPersonCamera(*this);
-		gameComponents.push_back(camera);
+		commonComponents.push_back(camera);
 		mServices.AddService(Camera::TypeIdClass(), camera);
 
 		currentPosition = XMFLOAT3(0.0f, 0.0f, 0.0f);
@@ -72,37 +72,35 @@ namespace Rendering
 
 		InitializeGame();
 		InitializeMenu();
+		InitializeCredentials();
 		Game::Initialize();
 
 		SetState(GameState::Menu);
+		
 
 		auto gameStartPosition = XMFLOAT3(0.0f, 13.0f, 0.0f);
 		ResetPosition(gameStartPosition);
-
-		
+		nonGamePosition = { gameStartPosition, forwardVector, upVector, rightVector };
+		gamePosition = { gameStartPosition, forwardVector, upVector, rightVector };
 
 	}
 
 	void RenderingGame::InitializeGame() {
 		keyboard = new Keyboard(*this, mDirectInput);
-		gameComponents.push_back(keyboard);
-		menuComponents.push_back(keyboard);
+		commonComponents.push_back(keyboard);
 		mServices.AddService(Keyboard::TypeIdClass(), keyboard);
 
 		mouse = new Mouse(*this, mDirectInput);
-		gameComponents.push_back(mouse);
-		menuComponents.push_back(mouse);
+		commonComponents.push_back(mouse);
 		mServices.AddService(Mouse::TypeIdClass(), mouse);
 
 		shadowMapping = new ShadowMappingDemo(*this, *camera);
 		gameComponents.push_back(shadowMapping);
 
 		auto mModel1 = new ModelFromFile(*this, *camera, "Content\\Models\\bench.3ds", L"A Bench", 20);
-		mModel1->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 0.0f, 12.0f, 0.0f);
+		mModel1->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 0.0f, 12.0f, -4.0f);
 		gameComponents.push_back(mModel1);
 		pickableComponents.push_back(mModel1);
-
-		currentComponents = &gameComponents;
 	}
 
 	void RenderingGame::InitializeMenu() {
@@ -123,21 +121,49 @@ namespace Rendering
 		
 	}
 
+	void RenderingGame::InitializeCredentials() {
+		auto wallWithCredentials = new ModelFromFile(*this, *camera, "Content\\Models\\bench.3ds", L"A Bench", 20);
+		wallWithCredentials->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 0.0f, 13.0f, -4.0f);
+		credentialsComponents.push_back(wallWithCredentials);
+	}
+
 	void RenderingGame::SetState(const GameState& newState) {
+		if (gameState == GameState::Game && newState != GameState::Game) {
+			gamePosition = { currentPosition, forwardVector, upVector, rightVector };
+			ResetPosition(nonGamePosition[0]);
+			SetRotation(nonGamePosition[1], nonGamePosition[2], nonGamePosition[3]);
+		}
+		if (gameState != GameState::Game && newState == GameState::Game) {
+			ResetPosition(gamePosition[0]);
+			SetRotation(gamePosition[1], gamePosition[2], gamePosition[3]);
+		}
 		gameState = newState;
+		if (gameState == GameState::Game) {
+			gamePosition = { currentPosition, forwardVector, upVector, rightVector };
+		}
+		
 		if (gameState == GameState::Menu) {
 			currentComponents = &menuComponents;
 		}
 		else if (gameState == GameState::Game) {
 			currentComponents = &gameComponents;
 		}
+		else if (gameState == GameState::Credentials) {
+			currentComponents = &credentialsComponents;
+		}
 	}
 
 	void RenderingGame::Shutdown()
 	{
-
-
+		for (auto comp : commonComponents)
+		{
+			DeleteObject(comp);
+		}
 		for (auto comp : gameComponents)
+		{
+			DeleteObject(comp);
+		}
+		for (auto comp : credentialsComponents)
 		{
 			DeleteObject(comp);
 		}
@@ -176,10 +202,11 @@ namespace Rendering
 			UpdateMenu(gameTime);
 			DrawMenu(gameTime);
 		}
+		else if (gameState == GameState::Credentials) {
+			mFpsComponent->Update(gameTime);
+			Game::Update(gameTime);
+		}
 	}
-
-
-	
 
 	void RenderingGame::UpdateMenu(const GameTime& gameTime) {
 		long x = Game::screenX, y = Game::screenY;
@@ -230,18 +257,15 @@ namespace Rendering
 				SetState(GameState::Game);
 				break;
 			case ButtonNumber::CredentialsButton:
-				mFpsComponent->setMenuMode(GameState::Credentials);
+				SetState(GameState::Credentials);
 				break;
 			case ButtonNumber::QuitButton:
-				mFpsComponent->setMenuMode(GameState::Menu);
+				Exit();
 				break;
 			}
 		}
 		
 	}
-	
-	//	float elapsedTime = (float)gameTime.ElapsedGameTime();
-	
 
 	void RenderingGame::UpdatePosition(const GameTime& gameTime) {
 		//const XMFLOAT3 Vector3Helper::Forward = XMFLOAT3(0.0f, 0.0f, -1.0f);
@@ -347,6 +371,17 @@ namespace Rendering
 		currentPosition = position;
 		camera->SetPosition(position);
 		shadowMapping->SetPosition(position);
+		
+	}
+
+	void RenderingGame::SetRotation(const XMFLOAT3& forward, const XMFLOAT3& up, const XMFLOAT3& right)
+	{
+		forwardVector = forward;
+		upVector = up;
+		rightVector = right;
+		camera->SetRotation(forward, up, right);
+		shadowMapping->SetRotation(forward, up, right);
+		
 	}
 
 	void RenderingGame::DrawMenu(const GameTime& gameTime)

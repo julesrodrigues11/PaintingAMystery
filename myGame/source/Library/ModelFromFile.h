@@ -25,7 +25,9 @@ namespace Library
 
 		void SetPosition(const float rotateX, const float rotateY, const float rotateZ, const float scaleFactor, const float translateX, const float translateY, const float translateZ);
 		void SetPosition(const float translateX, const float translateY, const float translateZ);
-
+		void ResetToOrigin();
+		void SetOriginAndPosition(const float rotateX, const float rotateY, const float rotateZ, const float scaleFactor, const float translateX, const float translateY, const float translateZ);
+		bool blocksMovement = false;
 		
 		//bounding box require to access the world matrix
 
@@ -45,6 +47,7 @@ namespace Library
 		void Release();
 
 	private:
+		std::vector<float> origin;
 		float rotateX = 0.0f;
 		float rotateY = 0.0f;
 		float rotateZ = 0.0f;

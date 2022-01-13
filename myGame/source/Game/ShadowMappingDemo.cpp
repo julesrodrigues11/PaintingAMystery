@@ -39,8 +39,8 @@ namespace Rendering
 	ShadowMappingDemo::ShadowMappingDemo(Game& game, Camera& camera)
 		: DrawableGameComponent(game, camera), mCheckerboardTexture(nullptr),
 		mPlanePositionVertexBuffer(nullptr), mPlanePositionUVNormalVertexBuffer(nullptr), mPlaneIndexBuffer(nullptr), mPlaneVertexCount(0),
-		mKeyboard(nullptr), mMouse(nullptr), mAmbientColor(1.0f, 1.0f, 1.0, 0.1f), mPointLight(nullptr),
-		mSpecularColor(1.0f, 1.0f, 1.0f, 0.0f), mSpecularPower(255.0f), mPlaneWorldMatrix(MatrixHelper::Identity), mProxyModel(nullptr),
+		mKeyboard(nullptr), mMouse(nullptr), mAmbientColor(1.0f, 1.0f, 1.0, 0.25f), mPointLight(nullptr),
+		mSpecularColor(1.0f, 1.0f, 1.0f, 0.0f), mSpecularPower(100.0f), mPlaneWorldMatrix(MatrixHelper::Identity), mProxyModel(nullptr),
 		mProjector(nullptr), mProjectorFrustum(XMMatrixIdentity()), mRenderableProjectorFrustum(nullptr),
 		mShadowMappingEffect(nullptr), mShadowMappingMaterial(nullptr),
 		mProjectedTextureScalingMatrix(MatrixHelper::Zero), mRenderStateHelper(game),
@@ -140,7 +140,7 @@ namespace Rendering
 
 
 		mPointLight = new PointLight(*mGame);
-		mPointLight->SetRadius(15.0f);
+		mPointLight->SetRadius(25.0f);
 		mPointLight->SetPosition(mCamera->Position());
 
 
@@ -323,11 +323,11 @@ namespace Rendering
 		helpLabel << L"Show Shadow Map (Enter): " << (mDrawDepthMap ? "Yes" : "No") << "\n";
 		helpLabel << std::setprecision(5) << L"Active Technique (Space): " << ShadowMappingDisplayNames[mActiveTechnique].c_str() << "\n";*/
 		helpLabel << L"Mouse coordinates: " << mousePosition.x << "; " << mousePosition.y << "\n";
-		if (mActiveTechnique == ShadowMappingTechniquePCF)
+		/*if (mActiveTechnique == ShadowMappingTechniquePCF)
 		{
 			helpLabel << L"Depth Bias (+J/-K): " << (int)mDepthBias << "\n"
 				<< L"Slope-Scaled Depth Bias (+O/-P): " << mSlopeScaledDepthBias;
-		}
+		}*/
 
 		mSpriteFont->DrawString(mSpriteBatch, helpLabel.str().c_str(), mTextPosition);
 
@@ -447,26 +447,22 @@ namespace Rendering
 
 	void ShadowMappingDemo::UpdatePointLightAndProjector(const GameTime& gameTime)
 	{
-		static float pointLightIntensity = mPointLight->Color().a;
+		static float pointLightIntensity = 0;
 		float elapsedTime = (float)gameTime.ElapsedGameTime();
 
 		// Update point light intensity		
-		if (mKeyboard->IsKeyDown(DIK_HOME) && pointLightIntensity < UCHAR_MAX)
+		if (mKeyboard->WasKeyPressedThisFrame(DIK_F) && pointLightIntensity == 255)
 		{
-			pointLightIntensity += LightModulationRate * elapsedTime;
-
-			XMCOLOR pointLightLightColor = mPointLight->Color();
-			pointLightLightColor.a = (UCHAR)XMMin<float>(pointLightIntensity, UCHAR_MAX);
-			mPointLight->SetColor(pointLightLightColor);
+			pointLightIntensity = 0;
 		}
-		if (mKeyboard->IsKeyDown(DIK_END) && pointLightIntensity > 0)
+		else if (mKeyboard->WasKeyPressedThisFrame(DIK_F) && pointLightIntensity == 0)
 		{
-			pointLightIntensity -= LightModulationRate * elapsedTime;
+			pointLightIntensity = 255;
 
-			XMCOLOR pointLightLightColor = mPointLight->Color();
-			pointLightLightColor.a = (UCHAR)XMMax<float>(pointLightIntensity, 0.0f);
-			mPointLight->SetColor(pointLightLightColor);
 		}
+			XMCOLOR color = mPointLight->Color();
+			color.a = (UCHAR)XMMin<float>(pointLightIntensity, UCHAR_MAX);
+			mPointLight->SetColor(color);
 
 		// Move point light and projector
 		XMFLOAT3 movementAmount = Vector3Helper::Zero;

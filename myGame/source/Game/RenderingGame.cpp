@@ -478,6 +478,10 @@ namespace Rendering
 			{ 
 				model->Take();
 			}
+			else if (model->Taken() == true)
+			{
+				model->Release();
+			}
 		
 		}
 	}

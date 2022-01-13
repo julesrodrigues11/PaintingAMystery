@@ -40,20 +40,29 @@
 FXC : warning X4717: Effects deprecated for D3DCompiler_47
   
   compilation object save succeeded; see F:\6CCGD001WGameGroupProject\myGame\build\Debug\Content\Effects\DepthMap.cso
+  Program.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  RenderingGame.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+F:\6CCGD001WGameGroupProject\myGame\source\Game\RenderingGame.cpp(213,38): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+F:\6CCGD001WGameGroupProject\myGame\source\Game\RenderingGame.cpp(213,35): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+F:\6CCGD001WGameGroupProject\myGame\source\Game\RenderingGame.cpp(425,58): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+F:\6CCGD001WGameGroupProject\myGame\source\Game\RenderingGame.cpp(425,43): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
   ShadowMappingDemo.cpp
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(478,7): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
-F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(478,29): warning C4309: 'argument': truncation of constant value
-F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(484,16): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
-F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(484,38): warning C4309: 'argument': truncation of constant value
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(473,7): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(473,29): warning C4309: 'argument': truncation of constant value
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(479,7): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(479,29): warning C4309: 'argument': truncation of constant value
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(484,7): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(484,29): warning C4309: 'argument': truncation of constant value
 F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(489,7): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
 F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(489,29): warning C4309: 'argument': truncation of constant value
-F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(494,16): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
-F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(494,38): warning C4309: 'argument': truncation of constant value
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(494,7): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
+F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(494,29): warning C4309: 'argument': truncation of constant value
 F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(499,7): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
 F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(499,29): warning C4309: 'argument': truncation of constant value
-F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(504,16): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
-F:\6CCGD001WGameGroupProject\myGame\source\Game\ShadowMappingDemo.cpp(504,38): warning C4309: 'argument': truncation of constant value
+  Generating Code...
   Game.vcxproj -> F:\6CCGD001WGameGroupProject\myGame\build\Debug\Game.exe
   F:\6CCGD001WGameGroupProject\myGame\build\..\..\external\assimp\bin\assimp_release-dll_win32\assimp.dll
           1 file(s) copied.

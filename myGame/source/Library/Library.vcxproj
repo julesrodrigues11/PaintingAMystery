@@ -184,6 +184,7 @@ copy "$(TargetPath)" "$(SolutionDir)..\lib\"
     <ClCompile Include="MatrixHelper.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ModelFromFile.cpp" />
     <ClCompile Include="ModelMaterial.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Pass.cpp" />
@@ -245,6 +246,7 @@ copy "$(TargetPath)" "$(SolutionDir)..\lib\"
     <ClInclude Include="MatrixHelper.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelFromFile.h" />
     <ClInclude Include="ModelMaterial.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Pass.h" />

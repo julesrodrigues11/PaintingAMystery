@@ -212,6 +212,17 @@ namespace Library
         XMStoreFloat4x4(&mWorldMatrix, worldMatrix);
     }
 
+    void ModelFromFile::ResetToOrigin()
+    {
+        SetPosition(origin[0], origin[1], origin[2], origin[3], origin[4], origin[5], origin[6]);
+    }
+
+    void ModelFromFile::SetOriginAndPosition(const float rotateX, const float rotateY, const float rotateZ, const float scaleFactor, const float translateX, const float translateY, const float translateZ)
+    {
+        origin = {rotateX, rotateY, rotateZ, scaleFactor, translateX, translateY, translateZ};
+        SetPosition(rotateX, rotateY, rotateZ, scaleFactor, translateX, translateY, translateZ);
+    }
+
 
 
     void ModelFromFile::Update(const GameTime& gameTime)

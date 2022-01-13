@@ -97,10 +97,16 @@ namespace Rendering
 		shadowMapping = new ShadowMappingDemo(*this, *camera);
 		gameComponents.push_back(shadowMapping);
 
-		auto mModel1 = new ModelFromFile(*this, *camera, "Content\\Models\\bench.3ds", L"A Bench", 20);
-		mModel1->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 0.0f, 12.0f, -4.0f);
-		gameComponents.push_back(mModel1);
-		pickableComponents.push_back(mModel1);
+		auto key = new ModelFromFile(*this, *camera, "Content\\Models\\key.fbx", L"a Key", 20);
+		key->SetOriginAndPosition(-1.57f, -0.0f, -0.0f, 0.005f, 0.0f, 12.0f, -4.0f);
+		gameComponents.push_back(key);
+		pickableComponents.push_back(key);
+
+		auto note = new ModelFromFile(*this, *camera, "Content\\Models\\paper_sheet.fbx", L"a note", 20);
+		note->SetOriginAndPosition(-1.57f, -0.0f, -0.0f, 0.005f, 0.0f, 12.0f, 4.0f);
+		note->blocksMovement = true;
+		gameComponents.push_back(note);
+		pickableComponents.push_back(note);
 	}
 
 	void RenderingGame::InitializeMenu() {
@@ -122,8 +128,8 @@ namespace Rendering
 	}
 
 	void RenderingGame::InitializeCredentials() {
-		auto wallWithCredentials = new ModelFromFile(*this, *camera, "Content\\Models\\bench.3ds", L"A Bench", 20);
-		wallWithCredentials->SetPosition(-1.57f, -0.0f, -0.0f, 0.005f, 0.0f, 13.0f, -4.0f);
+		auto wallWithCredentials = new ModelFromFile(*this, *camera, "Content\\Models\\bench.3ds");
+		wallWithCredentials->SetOriginAndPosition(-1.57f, -0.0f, -0.0f, 0.005f, 0.0f, 13.0f, -4.0f);
 		credentialsComponents.push_back(wallWithCredentials);
 	}
 
@@ -267,6 +273,13 @@ namespace Rendering
 		
 	}
 
+	void RenderingGame::DropObject() {
+		if (mTakenObject != nullptr) {
+			mTakenObject->ResetToOrigin();
+			mTakenObject = nullptr;
+		}
+	}
+
 	void RenderingGame::UpdatePosition(const GameTime& gameTime) {
 		//const XMFLOAT3 Vector3Helper::Forward = XMFLOAT3(0.0f, 0.0f, -1.0f);
 		XMFLOAT3 movementAmount = XMFLOAT3(0.0f, 0.0f, 0.0f);
@@ -292,6 +305,11 @@ namespace Rendering
 			{
 				movementAmount.x = 1.0f;
 			}
+
+			if (keyboard->IsKeyDown(DIK_F))
+			{
+				DropObject();
+			}
 		}
 
 		XMFLOAT2 rotationAmount = XMFLOAT2(0.0f, 0.0f);
@@ -303,9 +321,12 @@ namespace Rendering
 			rotationAmount.x = -mouseState->lX * 100.0f;
 			rotationAmount.y = -mouseState->lY * 100.0f;
 		}
-		float elapsedTime = (float)gameTime.ElapsedGameTime();
-		ApplyRotation(elapsedTime, rotationAmount);
-		Move(elapsedTime, movementAmount);
+		if (mTakenObject == nullptr || !mTakenObject->blocksMovement) {
+			float elapsedTime = (float)gameTime.ElapsedGameTime();
+			ApplyRotation(elapsedTime, rotationAmount);
+			Move(elapsedTime, movementAmount);
+		}
+		
 	}
 
 	void RenderingGame::ApplyRotation(float elapsedTime, XMFLOAT2 rotation) {
@@ -470,15 +491,10 @@ namespace Rendering
 		if (model->mBoundingBox.Intersects(rayOrigin, rayDir, tmin))
 		{
 			std::wostringstream pickupString;
-			pickupString << L"Do you want to pick up: " << (model->GetModelDes()).c_str()<<'\n'<<'\t'<<'+'<<model->ModelValue()<<L" points";
+			pickupString << L"You have picked up " << (model->GetModelDes()).c_str()<<'!';
 			
-			int result = MessageBox(0, pickupString.str().c_str(), L"Object Found", MB_ICONASTERISK | MB_YESNO);
-
-			if (result == IDYES)
-			{ 
-				model->Take();
-			}
-		
+			int result = MessageBox(0, pickupString.str().c_str(), L"Object picked up", MB_ICONASTERISK);
+			model->Take();
 		}
 	}
 	

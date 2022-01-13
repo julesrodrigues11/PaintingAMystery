@@ -52,6 +52,7 @@ namespace Rendering
 		void SetState(const GameState& newState);
         virtual void Update(const GameTime& gameTime) override;
 		void UpdateMenu(const GameTime& gameTime);
+		void DropObject();
 		void UpdatePosition(const GameTime& gameTime);
 		void ApplyRotation(float elapsedTime, XMFLOAT2 rotation);
 		void Move(float elapsedTime, XMFLOAT3 movementAmount);

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\Debug\Game.exe</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles>
+    <ContentFile>
+      <FullPath>C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\Debug\Content\Effects\DepthMap.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\Debug\Content\Effects\DiffuseLighting.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\Debug\Content\Effects\ShadowMapping.cso</FullPath>
+    </ContentFile>
+  </ContentFiles>
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

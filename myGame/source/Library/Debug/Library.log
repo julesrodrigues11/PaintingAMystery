@@ -1,0 +1,312 @@
+﻿  BasicMaterial.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  BlendStates.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Bloom.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  BloomMaterial.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  BoundingSphere.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  BufferContainer.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Camera.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  ColorHelper.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  DepthMap.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  DepthMapMaterial.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  DirectionalLight.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  DistortionMapping.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  DistortionMappingMaterial.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Door.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  DrawableGameComponent.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Effect.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  FirstPersonCamera.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  FpsComponent.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Frustum.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  FullScreenQuad.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Generating Code...
+  Compiling...
+  FullScreenRenderTarget.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Game.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Game.cpp(247,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Game.cpp(277,40): warning C4838: conversion from 'UINT' to 'LONG' requires a narrowing conversion
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Game.cpp(277,54): warning C4838: conversion from 'UINT' to 'LONG' requires a narrowing conversion
+  GameClock.cpp
+  GameComponent.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  GameException.cpp
+  GameTime.cpp
+  GaussianBlur.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  GaussianBlurMaterial.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Grid.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Keyboard.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Light.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Material.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  MatrixHelper.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Mesh.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\quaternion.inl(207,15): warning C4244: '=': conversion from 'double' to 'TReal', possible loss of data
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\quaternion.inl(186): message : while compiling class template member function 'void aiQuaterniont<float>::Interpolate(aiQuaterniont<float> &,const aiQuaterniont<float> &,const aiQuaterniont<float> &,TReal)'
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\anim.h(435): message : see reference to function template instantiation 'void aiQuaterniont<float>::Interpolate(aiQuaterniont<float> &,const aiQuaterniont<float> &,const aiQuaterniont<float> &,TReal)' being compiled
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\anim.h(107): message : see reference to class template instantiation 'aiQuaterniont<float>' being compiled
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\quaternion.inl(208,14): warning C4244: '=': conversion from 'double' to 'TReal', possible loss of data
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\quaternion.inl(209,61): warning C4244: '=': conversion from 'double' to 'TReal', possible loss of data
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\quaternion.inl(210,33): warning C4244: '=': conversion from 'double' to 'TReal', possible loss of data
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\vector3.inl(93,13): warning C4244: 'return': conversion from 'double' to 'TReal', possible loss of data
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\vector3.inl(92): message : while compiling class template member function 'TReal aiVector3t<TReal>::Length(void) const'
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\vector3.inl(98): message : see reference to function template instantiation 'TReal aiVector3t<TReal>::Length(void) const' being compiled
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\vector3.inl(142): message : while compiling class template member function 'bool aiVector3t<float>::operator ==(const aiVector3t<float> &) const'
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\anim.h(82): message : see reference to function template instantiation 'bool aiVector3t<float>::operator ==(const aiVector3t<float> &) const' being compiled
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\types.h(151): message : see reference to class template instantiation 'aiVector3t<float>' being compiled
+  Model.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\quaternion.inl(207,15): warning C4244: '=': conversion from 'double' to 'TReal', possible loss of data
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\quaternion.inl(186): message : while compiling class template member function 'void aiQuaterniont<float>::Interpolate(aiQuaterniont<float> &,const aiQuaterniont<float> &,const aiQuaterniont<float> &,TReal)'
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\anim.h(435): message : see reference to function template instantiation 'void aiQuaterniont<float>::Interpolate(aiQuaterniont<float> &,const aiQuaterniont<float> &,const aiQuaterniont<float> &,TReal)' being compiled
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\anim.h(107): message : see reference to class template instantiation 'aiQuaterniont<float>' being compiled
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\quaternion.inl(208,14): warning C4244: '=': conversion from 'double' to 'TReal', possible loss of data
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\quaternion.inl(209,61): warning C4244: '=': conversion from 'double' to 'TReal', possible loss of data
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\quaternion.inl(210,33): warning C4244: '=': conversion from 'double' to 'TReal', possible loss of data
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\vector3.inl(93,13): warning C4244: 'return': conversion from 'double' to 'TReal', possible loss of data
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\vector3.inl(92): message : while compiling class template member function 'TReal aiVector3t<TReal>::Length(void) const'
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\vector3.inl(98): message : see reference to function template instantiation 'TReal aiVector3t<TReal>::Length(void) const' being compiled
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\vector3.inl(142): message : while compiling class template member function 'bool aiVector3t<float>::operator ==(const aiVector3t<float> &) const'
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\anim.h(82): message : see reference to function template instantiation 'bool aiVector3t<float>::operator ==(const aiVector3t<float> &) const' being compiled
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\types.h(151): message : see reference to class template instantiation 'aiVector3t<float>' being compiled
+  ModelFromFile.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  ModelMaterial.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\quaternion.inl(207,15): warning C4244: '=': conversion from 'double' to 'TReal', possible loss of data
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\quaternion.inl(186): message : while compiling class template member function 'void aiQuaterniont<float>::Interpolate(aiQuaterniont<float> &,const aiQuaterniont<float> &,const aiQuaterniont<float> &,TReal)'
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\anim.h(435): message : see reference to function template instantiation 'void aiQuaterniont<float>::Interpolate(aiQuaterniont<float> &,const aiQuaterniont<float> &,const aiQuaterniont<float> &,TReal)' being compiled
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\anim.h(107): message : see reference to class template instantiation 'aiQuaterniont<float>' being compiled
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\quaternion.inl(208,14): warning C4244: '=': conversion from 'double' to 'TReal', possible loss of data
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\quaternion.inl(209,61): warning C4244: '=': conversion from 'double' to 'TReal', possible loss of data
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\quaternion.inl(210,33): warning C4244: '=': conversion from 'double' to 'TReal', possible loss of data
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\vector3.inl(93,13): warning C4244: 'return': conversion from 'double' to 'TReal', possible loss of data
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\vector3.inl(92): message : while compiling class template member function 'TReal aiVector3t<TReal>::Length(void) const'
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\vector3.inl(98): message : see reference to function template instantiation 'TReal aiVector3t<TReal>::Length(void) const' being compiled
+          with
+          [
+              TReal=float
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\vector3.inl(142): message : while compiling class template member function 'bool aiVector3t<float>::operator ==(const aiVector3t<float> &) const'
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\anim.h(82): message : see reference to function template instantiation 'bool aiVector3t<float>::operator ==(const aiVector3t<float> &) const' being compiled
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\external\assimp\include\assimp\types.h(151): message : see reference to class template instantiation 'aiVector3t<float>' being compiled
+  Mouse.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Pass.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  PointLight.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Generating Code...
+  Compiling...
+  PostProcessingMaterial.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  ProjectiveTextureMappingMaterial.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Projector.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  ProxyModel.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  RasterizerStates.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Ray.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  RenderableFrustum.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  RenderStateHelper.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  RenderTarget.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  SamplerStates.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  ServiceContainer.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  ShadowMappingMaterial.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Skybox.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  SkyboxMaterial.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  SpotLight.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Technique.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Utility.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xstring(2575,23): warning C4244: 'argument': conversion from 'wchar_t' to 'const _Elem', possible loss of data
+          with
+          [
+              _Elem=char
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xstring(2586): message : see reference to function template instantiation 'void std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Construct<wchar_t*>(_Iter,const _Iter,std::input_iterator_tag)' being compiled
+          with
+          [
+              _Iter=wchar_t *
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xstring(2586): message : see reference to function template instantiation 'void std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Construct<wchar_t*>(_Iter,const _Iter,std::input_iterator_tag)' being compiled
+          with
+          [
+              _Iter=wchar_t *
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xstring(2566): message : see reference to function template instantiation 'void std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Construct<wchar_t*>(const _Iter,const _Iter,std::forward_iterator_tag)' being compiled
+          with
+          [
+              _Iter=wchar_t *
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xstring(2566): message : see reference to function template instantiation 'void std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Construct<wchar_t*>(const _Iter,const _Iter,std::forward_iterator_tag)' being compiled
+          with
+          [
+              _Iter=wchar_t *
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Utility.cpp(15): message : see reference to function template instantiation 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,0>(_Iter,_Iter,const _Alloc &)' being compiled
+          with
+          [
+              _Elem=wchar_t,
+              _Iter=std::_String_iterator<std::_String_val<std::_Simple_types<wchar_t>>>,
+              _Alloc=std::allocator<char>
+          ]
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Utility.cpp(15): message : see reference to function template instantiation 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,0>(_Iter,_Iter,const _Alloc &)' being compiled
+          with
+          [
+              _Elem=wchar_t,
+              _Iter=std::_String_iterator<std::_String_val<std::_Simple_types<wchar_t>>>,
+              _Alloc=std::allocator<char>
+          ]
+  Variable.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  VectorHelper.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Generating Code...
+  Library.vcxproj -> C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\Debug\Libraryd.lib
+  A subdirectory or file C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\lib\ already exists.
+          1 file(s) copied.

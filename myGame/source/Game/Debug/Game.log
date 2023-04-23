@@ -1,0 +1,94 @@
+﻿  A subdirectory or file C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\Debug\Content already exists.
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Effects\BasicEffect.cso
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Effects\BasicEffect.fx
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Effects\DepthMap.cso
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Effects\DepthMap.fx
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Effects\DiffuseLighting.fx
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Effects\ShadowMapping.cso
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Effects\ShadowMapping.fx
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Effects\TextureMapping.cso
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Effects\TextureMapping.fx
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Effects\include\Common.fxh
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Fonts\Arial_14_Regular.spritefont
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Models\bench.3ds
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Models\ceilling.fbx
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Models\DirectionalLightProxy.mtl
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Models\DirectionalLightProxy.obj
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Models\door.fbx
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Models\environment.fbx
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Models\key.fbx
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Models\keypad.fbx
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Models\LegalPad.fbx
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Models\painting.fbx
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Models\paper_sheet.fbx
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Models\PointLightProxy.obj
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Models\secret_door.fbx
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Textures\ceilling_texture.png
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Textures\credits.png
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Textures\door_texture.png
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Textures\end.png
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Textures\environment_texture.png
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Textures\KeyNote.jpg
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Textures\keypad_texture - Copy.png
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Textures\keypad_texture.png
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Textures\key_texture.png
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Textures\menu.png
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Textures\note2.jpg
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Textures\painting_note.jpg
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Textures\painting_texture.png
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Textures\PointLightProxy.mtl
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Textures\secret_door_texture.png
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Textures\texture_environment_gpdx2.png
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\content\Textures\white.jpg
+  41 File(s) copied
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\Debug\Content\Effects\DepthMap.cso
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\Debug\Content\Effects\DiffuseLighting.cso
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\Debug\Content\Effects\ShadowMapping.cso
+  Program.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  RenderingGame.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\RenderingGame.cpp(281,38): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\RenderingGame.cpp(281,35): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\RenderingGame.cpp(283,19): warning C4244: 'initializing': conversion from 'double' to 'long', possible loss of data
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\RenderingGame.cpp(284,20): warning C4244: 'initializing': conversion from 'double' to 'long', possible loss of data
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\RenderingGame.cpp(285,17): warning C4244: 'initializing': conversion from 'double' to 'long', possible loss of data
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\RenderingGame.cpp(287,21): warning C4244: 'initializing': conversion from 'double' to 'long', possible loss of data
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\RenderingGame.cpp(341,38): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\RenderingGame.cpp(341,35): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\RenderingGame.cpp(343,19): warning C4244: 'initializing': conversion from 'double' to 'long', possible loss of data
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\RenderingGame.cpp(344,20): warning C4244: 'initializing': conversion from 'double' to 'long', possible loss of data
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\RenderingGame.cpp(347,21): warning C4244: 'initializing': conversion from 'double' to 'long', possible loss of data
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\RenderingGame.cpp(579,71): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\RenderingGame.cpp(579,52): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+  ShadowMappingCredits.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  ShadowMappingEnd.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  ShadowMappingMenu.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  ShadowMappingBase.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\ShadowMappingBase.cpp(477,7): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\ShadowMappingBase.cpp(477,29): warning C4309: 'argument': truncation of constant value
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\ShadowMappingBase.cpp(483,7): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\ShadowMappingBase.cpp(483,29): warning C4309: 'argument': truncation of constant value
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\ShadowMappingBase.cpp(488,7): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\ShadowMappingBase.cpp(488,29): warning C4309: 'argument': truncation of constant value
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\ShadowMappingBase.cpp(493,7): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\ShadowMappingBase.cpp(493,29): warning C4309: 'argument': truncation of constant value
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\ShadowMappingBase.cpp(498,7): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\ShadowMappingBase.cpp(498,29): warning C4309: 'argument': truncation of constant value
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\ShadowMappingBase.cpp(503,7): warning C4305: 'argument': truncation from 'unsigned int' to 'Library::byte'
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Game\ShadowMappingBase.cpp(503,29): warning C4309: 'argument': truncation of constant value
+  Generating Code...
+  LINK : C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\Debug\Game.exe not found or not built by the last incremental link; performing full link
+  Game.vcxproj -> C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\Debug\Game.exe
+  C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\build\..\..\external\assimp\bin\assimp_release-dll_win32\assimp.dll
+          1 file(s) copied.

@@ -1,0 +1,120 @@
+﻿  BasicMaterial.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  BlendStates.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Bloom.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  BloomMaterial.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  BoundingSphere.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  BufferContainer.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Camera.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  ColorHelper.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  DepthMap.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  DepthMapMaterial.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  DirectionalLight.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  DistortionMapping.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  DistortionMappingMaterial.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Door.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  DrawableGameComponent.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Effect.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  FirstPersonCamera.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  FpsComponent.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Frustum.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  FullScreenQuad.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Generating Code...
+  Compiling...
+  FullScreenRenderTarget.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Game.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  GameClock.cpp
+  GameComponent.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  GameException.cpp
+  GameTime.cpp
+  GaussianBlur.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  GaussianBlurMaterial.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Grid.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Keyboard.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Light.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Material.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  MatrixHelper.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Mesh.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Model.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  ModelFromFile.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  ModelMaterial.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Mouse.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Pass.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  PointLight.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Generating Code...
+  Compiling...
+  PostProcessingMaterial.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  ProjectiveTextureMappingMaterial.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Projector.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  ProxyModel.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  RasterizerStates.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Ray.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  RenderableFrustum.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  RenderStateHelper.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  RenderTarget.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  SamplerStates.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  ServiceContainer.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  ShadowMappingMaterial.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Skybox.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  SkyboxMaterial.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  SpotLight.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Technique.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Utility.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Variable.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  VectorHelper.cpp
+C:\Users\denys\Downloads\painting-a-mystery-FINAL\painting-a-mystery-16012022\myGame\source\Library\Common.h(14,10): fatal error C1083: Cannot open include file: 'd3dx11Effect.h': No such file or directory
+  Generating Code...
